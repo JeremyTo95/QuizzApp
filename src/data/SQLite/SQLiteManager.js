@@ -60,6 +60,18 @@ export default class SQLiteManager extends React.Component {
 	}
 
 	/**
+	 * Convert the id into label
+	 * @param {Table name where we want to search the label} tableName 
+	 * @param {Id which is gonnad send back the label} id 
+	 */
+	async convertIdToLabel(tableName, id) {
+		let labelSQL = await this.ExecuteQuery("SELECT label FROM " + tableName + " WHERE id = " + id, []);
+		var rows = labelSQL.rows;
+		var label = rows.raw();
+		return label[0]['label'];
+	}
+
+	/**
 	 * Insert question in database from string response
 	 * @param { Donnée réponse de la requête en format String } dataStr 
 	 */

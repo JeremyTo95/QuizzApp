@@ -7,6 +7,11 @@ export default class HomeViewModel {
 		await this.store.initData();
 	}
 
+	async convertIdToLabel(tableName, id) {
+		var label = await this.store.convertIdToLabel(tableName, id);
+		return label;
+	}
+
 	getCategories() {
 		return this.store.getCategories();
 	}

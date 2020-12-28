@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 
 import RootStore from './models/RootStore';
 // import HomeProvider from './screens/Home/HomeProvider.js';
+import * as Colors from './assets/Colors';
 import Router from './router';
 
 
@@ -26,12 +27,10 @@ export default class App extends React.Component {
 	render() {
 		console.log('home');
 		return (
-			// <Text>Hi</Text>
 			<Provider { ...rootStore.getStores() }>
-				{/* <HomeProvider /> */}
 				<View style={{flex: 1}}>
 					<NavigationContainer>
-						<StatusBar barStyle='default' />
+						<StatusBar barStyle='light-content' backgroundColor={ Colors.BACKGROUND_COLOR } />
 						<Router />
 					</NavigationContainer>
 				</View>

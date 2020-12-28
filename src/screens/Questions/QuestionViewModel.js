@@ -7,12 +7,26 @@ export default class QuestionViewModel {
 		await this.store.setQuestion(cat, level, answers, anec);
 	}
 
+	async convertLabelToName(tableName, id) {
+		var res = await this.store.convertLabelToName(tableName, id);
+		return res;
+	}
+	
+	async convertLabelToId(tableName, id) {
+		var res = await this.store.convertLabelToId(tableName, id);
+		return res;
+	}
+
 	getQuestion() {
 		return this.store.getQuestion();
 	}
 
 	getAnswer() {
 		return this.store.getAnswer();
+	}
+
+	getAnswerIndex() {
+		return this.store.getAnswerIndex();
 	}
 
 	getAnswers() {
