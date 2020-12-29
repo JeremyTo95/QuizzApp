@@ -2,10 +2,12 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeRoutes from './home.routes';
-// import bottomHomeNavigator from './bottomHomeNavigator.routes';
 
 const RootStack = createStackNavigator();
 
+/**
+ * Router : route engine 
+ */
 const Router = () => {
 	return (<RootStack.Navigator>
 		<RootStack.Screen

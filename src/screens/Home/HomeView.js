@@ -9,7 +9,9 @@ import Button from '../../components/Button';
 import * as Colors from '../../assets/Colors';
 import styles from './styles';
 
-
+/**
+ * Home View
+ */
 export default class HomeView extends React.Component {
 	constructor(props) {
 		super(props)

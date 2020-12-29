@@ -1,7 +1,9 @@
 import React from 'react';
 import SQLite from 'react-native-sqlite-storage';
 
-
+/**
+ * SQL Manager : Manage the local data
+ */
 export default class SQLiteManager extends React.Component {
 	constructor() {
 		super();
@@ -76,30 +78,29 @@ export default class SQLiteManager extends React.Component {
 	 * @param { Donnée réponse de la requête en format String } dataStr 
 	 */
 	async insertQuestion(dataStr) {
-		var cat      = undefined;
-		var level    = undefined;
-		var answer   = undefined;
-		var question = undefined;
-		var anecdote = undefined;
-		var theme    = undefined;
-		var answers  = {};
+		var cat      = undefined;	// initialisation of the category variable
+		var level    = undefined;	// initialisation of the level variable
+		var answer   = undefined;	// initialisation of the answer variable
+		var question = undefined;	// initialisation of the question variable
+		var anecdote = undefined;	// initialisation of the anecdote variable
+		var theme    = undefined;	// initialisation of the theme variable
+		var answers  = {};			// initialisation of the answers variable
 
-		JSON.parse(dataStr, (k, v) => {
+		JSON.parse(dataStr, (k, v) => {									// Setup of the variables with the data
 			if      (k == 'categorie')                cat                   = v;
 			else if (k == 'theme')                    theme                 = v;
 			else if (k == 'difficulte')               level                 = v;
 			else if (k == 'question')                 question              = v;
 			else if (k == 'reponse_correcte')         answer                = v;
 			else if (k == 'anecdote')                 anecdote              = v;
-			else if (k == 0 && typeof(v) == 'string') answers['answer' + k] = v;
-			else if (k == 1 && typeof(v) == 'string') answers['answer' + k] = v;
-			else if (k == 2 && typeof(v) == 'string') answers['answer' + k] = v;
-			else if (k == 3 && typeof(v) == 'string') answers['answer' + k] = v; 
+			else if (k == 0 && typeof(v) == 'string') answers[k] = v;
+			else if (k == 1 && typeof(v) == 'string') answers[k] = v;
+			else if (k == 2 && typeof(v) == 'string') answers[k] = v;
+			else if (k == 3 && typeof(v) == 'string') answers[k] = v; 
 		});
 
-		// OK valider / Pas touche
-		const getIdCategorySQL  = "SELECT id FROM CATEGORIES WHERE name = '" + cat + "'";
-		const getIdLevelSQL     = "SELECT id FROM LEVELS WHERE name = '" + level + "'";
+		const getIdCategorySQL  = "SELECT id FROM CATEGORIES WHERE name = '" + cat + "'";	// Get category id query
+		const getIdLevelSQL     = "SELECT id FROM LEVELS WHERE name = '" + level + "'";		// Qet level id query
 		var idCategory          = await this.ExecuteQuery(getIdCategorySQL, []);
 		var idLevel             = await this.ExecuteQuery(getIdLevelSQL, []);
 		idCategory              = idCategory.rows.raw();
@@ -107,10 +108,9 @@ export default class SQLiteManager extends React.Component {
 		idCategory              = idCategory[0].id;
 		idLevel                 = idLevel[0].id;
 
-		const insertQuestionSQL = "INSERT INTO QUESTIONS(idCategory, idLevel, label, anectode, theme, answer, answers) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		let questionInsert = await this.ExecuteQuery(insertQuestionSQL, [idCategory, idLevel, question, anecdote, theme, answer, JSON.stringify(answers)]);
-		console.log(questionInsert);
-		if (questionInsert['rowsAffected'] == 1) console.info("Row inserted");
-		else console.error("Error insert question")    
+		const insertQuestionSQL = "INSERT INTO QUESTIONS(idCategory, idLevel, label, anecdote, theme, answer, answers) VALUES (?, ?, ?, ?, ?, ?, ?)"; 		// Insert question query
+		let questionInsert = await this.ExecuteQuery(insertQuestionSQL, [idCategory, idLevel, question, anecdote, theme, answer, JSON.stringify(answers)]);	// Execution
+		if (questionInsert['rowsAffected'] == 1) console.info("Row inserted");	// Debug info console
+		else console.error("Error insert question")    						// Debug info console
 	}
 }

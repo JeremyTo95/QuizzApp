@@ -3,6 +3,10 @@ import { View, Text } from 'react-native';
 
 import styles from './styles';
 
+/**
+ * Subtitle
+ * { Subtitle to show } subtitle
+ */
 export default class Subtitle extends React.Component {
         render() {
                 return(

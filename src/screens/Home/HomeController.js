@@ -7,9 +7,11 @@ import QuestionCard from '../../components/QuestionCard';
 import Button from '../../components/Button';
 
 import * as screen_labels from '../constants'
-import * as tableNames from '../../data/SQLite/constants';
 import styles from '../../components/Title/styles';
 
+/**
+ * Home controller
+ */
 export default class HomeController extends React.Component {
 	constructor(props) {
 		super(props);
@@ -28,8 +30,10 @@ export default class HomeController extends React.Component {
 		}
 	}
 
+	/**
+	 * Initialization data 
+	 */
 	async componentDidMount() {
-		console.log("componentDisMount()");
 		await this.props.viewModel.initData();
 		this.setState({
 			levels:  this.props.viewModel.getLevels(),
@@ -39,28 +43,57 @@ export default class HomeController extends React.Component {
 		});
 	}
 
-	componentDidUpdate() {
-		console.log("update");
-	}
-
-	componentDidCatch() {
-		console.log("catch");
-	}
-
-	setMenuCat = ref => { this.setState({ menuCat: ref }) };
+	/**
+	 * Define the reference category menu for dropdown
+	 * @param { Ref menu } ref 
+	 */
+	setMenuCat = ref => { 
+		this.setState({ menuCat: ref }) 
+	};
+	
+	/**
+	 * Hide category menu 
+	 * @param {new label value} value 
+	 */
 	hideMenuCat = (value) => {
 		this.setState({ labelMenuCat: value, })
 		this.state.menuCat.hide();
 	};
-	showMenuCat = () => { this.state.menuCat.show(); };
 
-	setMenuLevel = ref => { this.setState({ menuLevel: ref }) };
+	/**
+	 * Show category menu
+	 */
+	showMenuCat = () => { 
+		this.state.menuCat.show(); 
+	};
+
+	/**
+	 * Define the reference level menu
+	 * @param {Ref menu} ref 
+	 */
+	setMenuLevel = ref => { 
+		this.setState({ menuLevel: ref }) 
+	};
+
+	/**
+	 * Hide the level menu
+	 * @param {new label value} value 
+	 */
 	hideMenuLevel = (value) => {
 		this.setState({ labelMenuLevel: value, })
 		this.state.menuLevel.hide();
 	};
-	showMenuLevel = () => { this.state.menuLevel.show(); };
 
+	/**
+	 * Show level menu
+	 */
+	showMenuLevel = () => { 
+		this.state.menuLevel.show(); 
+	};
+
+	/**
+	 * Build select categories options for dropdown menu
+	 */
 	buildSelectCategories = () => {
 		if (this.state.categories != null) {
 			return (
@@ -75,6 +108,9 @@ export default class HomeController extends React.Component {
 		}
 	}
 
+	/**
+	 * Build select levels options for dropdown menu
+	 */
 	buildSelectLevels = () => {
 		if (this.state.levels != null) {
 			return (
@@ -95,14 +131,20 @@ export default class HomeController extends React.Component {
 		}
 	}
 
+	/**
+	 * Update the question number
+	 * @param {new question number} value 
+	 */
 	updateQuestionNumber = (value) => {
-		console.log(value/100);
 		if (value/100 < 1) {
 			if (value != "") this.setState({ nbQuestions: parseInt(value) });
 			else this.setState({ nbQuestions: "" });
 		}
 	}
 
+	/**
+	 * Build score history
+	 */
 	buildScoresHistory = () => {
 		var cpt = 0;
 		if (this.state.scores != null) {
@@ -116,22 +158,30 @@ export default class HomeController extends React.Component {
 		}
 	}
 
+	/**
+	 * Build question history
+	 */
 	buildQuestionsHistory = () => {
 		var cpt = 0;
 		if (this.state.questions != null) {
 			return (
 				this.state.questions.map(item => {
 					cpt++;
-					if (this.state.showAllQuestions == true || cpt <= 5)
+					if (this.state.showAllQuestions == true || cpt <= 5) {
 						return (<QuestionCard key={ item['id'] } question={ item } />);
+						// return (<Text style={styles.text} key={item['id']}>{item['label']}</Text>)
+					}
 				})
 			);
 		}
 	}
 
+	/**
+	 * Start quizz (check also that the configuration is correct)
+	 */
 	startQuizz = () => {
 		if (this.state.nbQuestions >= 1 && this.state.nbQuestions <= 10 && this.state.labelMenuCat != "Selectionner" && this.state.labelMenuLevel != "Selectionner") {
-			this.props.nav.navigate(screen_labels.QUESTION, { cat: this.state.labelMenuCat, level: this.state.labelMenuLevel })
+			this.props.nav.navigate(screen_labels.QUESTION, { cat: this.state.labelMenuCat, level: this.state.labelMenuLevel, nbQuestions: this.state.nbQuestions })
 		} else {
 			return (
 				Alert.alert(
@@ -148,6 +198,9 @@ export default class HomeController extends React.Component {
 		}
 	}
 
+	/**
+	 * Manage the show more / less scores button
+	 */
 	showAllScores = () => {
 		var scoreState = this.state.showAllScores;
 		this.setState({
@@ -156,6 +209,9 @@ export default class HomeController extends React.Component {
 		});
 	}
 
+	/**
+	 * Manage the show more / less questions button
+	 */
 	showAllQuestions = () => {
 		var questionState = this.state.showAllQuestions;
 		this.setState({

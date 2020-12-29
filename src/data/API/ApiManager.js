@@ -2,15 +2,22 @@ import React from 'react';
 import sqlManager from '../SQLite'
 import * as ApiOptions from './ApiOptions';
 
+/**
+ * API Manager : Get data from API
+ */
 export default class ApiManager extends React.Component {
 	constructor() {
 		super();
-		console.log("ApiManager");
-		this.state = {
-			data: "null"
-		}
+		this.state = { data: "null" }
 	}
 
+	/**
+	 * HTTP request on the API
+	 * @param { Category to search } cat 
+	 * @param { Level to search } diff 
+	 * @param { Number of answer desired } nbAnswers 
+	 * @param { Boolean value to define the anecdote } anec 
+	 */
 	ExecuteQuery = (cat, diff, nbAnswers = 4, anec = 1) => new Promise((resolve, reject) => {
 		const url = ApiOptions.API_URL + ApiOptions.API_KEY_1 + ApiOptions.API_SET_CATEGORY + cat + ApiOptions.API_SET_DIFFICULTY + diff + ApiOptions.API_SET_NB_CHOICE_OPTIONS + nbAnswers + ApiOptions.API_IS_ANECDOTE + anec;
 		console.log(url);
@@ -24,6 +31,13 @@ export default class ApiManager extends React.Component {
 		});
 	});
 
+	/**
+	 * Get Query on the API
+	 * @param { Category to search } cat 
+	 * @param { Level to search } diff 
+	 * @param { Number of answer desired } nbAnswers 
+	 * @param { Boolean value to define the anecdote } anec 
+	 */
 	async GetQuery(cat, diff, nbAnswers = 4, anec = 1) {
 		var data = await this.ExecuteQuery(cat, diff, nbAnswers, anec);
 		

@@ -56,7 +56,9 @@ const styles = StyleSheet.create({
 	history_container: {
 		flex: 1,
 		backgroundColor: Colors.ACCENT_COLOR,
-		borderRadius: 65.0,
+		// borderRadius: 65.0,
+		borderTopLeftRadius: 65.0,
+		borderTopRightRadius: 65.0,
 		paddingTop: 20.0
 	}
 });

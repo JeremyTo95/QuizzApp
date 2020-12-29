@@ -80,11 +80,26 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20.0,
 		borderRadius: 30.0,
 	},
+	anecdote_container: {
+		marginHorizontal: 20.0,
+		paddingVertical: 10.0
+	},
+	anecdote:{
+		color: Colors.TEXT_COLOR,
+		fontSize: 15.0,
+		fontFamily: 'Montserrat-Regular'
+	},
 	message_container: {
-		
+		marginHorizontal: 20.0,
+		paddingVertical: 10.0
 	},
 	message:{
 		color: 'red',
+		fontFamily: 'Montserrat-SemiBold'
+	},
+	subtitle: {
+		fontSize: 18.0,
+		color: Colors.TEXT_COLOR,
 		fontFamily: 'Montserrat-SemiBold'
 	}
 });

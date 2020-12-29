@@ -7,11 +7,12 @@ import { Provider } from 'mobx-react';
 import 'react-native-gesture-handler';
 
 import RootStore from './models/RootStore';
-// import HomeProvider from './screens/Home/HomeProvider.js';
 import * as Colors from './assets/Colors';
 import Router from './router';
 
-
+/**
+ * Open the database
+ */
 global.db = SQLite.openDatabase({
 	name: 'SQLite',
 	location: 'default',
@@ -23,6 +24,9 @@ error => {
 
 const rootStore = new RootStore();
 
+/**
+ * App class
+ */
 export default class App extends React.Component {
 	render() {
 		console.log('home');

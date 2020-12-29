@@ -7,10 +7,12 @@ import Button from '../../components/Button';
 
 import styles from './styles';
 
+/**
+ * Question View
+ */
 export default class QuestionView extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log("constructor QuestionView")
 	}
 	
 	render() {
@@ -56,7 +58,8 @@ export default class QuestionView extends React.Component {
 						/>
 					</View>
 					<View style={ styles.anecdote_container }>
-						<Text style={ styles.anecdote_content }>{(controllerState.isConfirm) ? controllerState.anecdote : "" }</Text>
+						<Text style={ styles.subtitle }>{(controllerState.isConfirm) ? "L'anecdote : " : "" }</Text>
+						<Text style={ styles.anecdote }>{(controllerState.isConfirm) ? controllerState.anecdote : "" }</Text>
 					</View>
 					<View style={ styles.message_container }>
 						<Text style={ styles.message }> { controllerState.stateNextQuestion }</Text>

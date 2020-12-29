@@ -1,3 +1,7 @@
+/**
+ * Application colors
+ */
+
 export const BACKGROUND_COLOR = "#1B1B1A";
 export const ACCENT_COLOR     = "#242424";
 export const TEXT_COLOR       = "#CCCCCC";

@@ -8,6 +8,9 @@ import * as screen_labels from '../screens/constants';
 
 const HomeStack = createStackNavigator();
 
+/**
+ * Home routes : define all home routes 
+ */
 const HomeRoutes = () => {
 	return (<HomeStack.Navigator>
 		<HomeStack.Screen

@@ -4,6 +4,9 @@ import HomeController from './HomeController';
 import HomeViewModel from './HomeViewModel';
 import RootStore from '../../models/RootStore';
 
+/**
+ * Home provider
+ */
 @inject(RootStore.type.HOME_MODEL)
 class HomeProvider extends React.Component {
 	constructor(props) {

@@ -3,13 +3,34 @@ import apiManager from '../../data/API';
 import sqlManager from '../../data/SQLite'
 import * as TableNames from '../../data/SQLite/constants';
 
+/**
+ * Question Model
+ */
 export default class QuestionModel {
-	@observable question = undefined;
-	@observable answer   = undefined;
-	@observable answers  = [];
-	@observable score    = 0;
-	@observable second   = 0;
-	@observable anecdote = undefined;
+	@observable question    = undefined;
+	@observable answer      = undefined;
+	@observable answerIndex = undefined;
+	@observable answers     = [];
+	@observable score       = 0;
+	@observable second      = 0;
+	@observable anecdote    = undefined;
+
+
+	/**
+	 * Shuffle the array
+	 * @param {Array to shuffle} array 
+	 */
+	shuffleArray(array) {
+		let curId = array.length;
+		while (0 !== curId) {
+			let randId = Math.floor(Math.random() * curId);
+			curId -= 1;
+			let tmp = array[curId];
+			array[curId] = array[randId];
+			array[randId] = tmp;
+		}
+		return array;
+	}
 
 	/**
 	 * HTTP request on the API to get the new question
@@ -21,12 +42,16 @@ export default class QuestionModel {
 	async setQuestion(cat, level, answers = 4, anec = 1) {
 		var response     = await apiManager.GetQuery(cat, level, answers, anec);
 		var responseJSON = JSON.parse(response);
-		console.log(responseJSON);
-		this.question    = responseJSON['results'][0]['question'];
-		this.answer      = responseJSON['results'][0]['reponse_correcte'];
-		this.answers     = responseJSON['results'][0]['autres_choix'];
-		this.anecdote    = responseJSON['results'][0]['anecdote'];
-		sqlManager.insertQuestion(response);
+		if (responseJSON['response_code'] == 0) {
+			this.question    = responseJSON['results'][0]['question'];
+			this.answer      = responseJSON['results'][0]['reponse_correcte'];
+			this.answers     = responseJSON['results'][0]['autres_choix'];
+			this.anecdote    = responseJSON['results'][0]['anecdote'];
+			this.answers     = this.shuffleArray(this.answers);
+			sqlManager.insertQuestion(response);
+		} else {
+			console.info('Wait the entire minute before to restart');
+		}
 	}
 
 	/**
@@ -42,20 +67,20 @@ export default class QuestionModel {
 	/**
 	 * Convert the label into name from the table name specified
 	 * @param {table name where we want to get the name} tableName 
-	 * @param {identifier of the data which we want the label} id 
+	 * @param {Label of the data which we want the name} label 
 	 */
-	async convertLabelToName(tableName, id) {
-		var nameCat = await sqlManager.convertLabelToName(tableName, id);
+	async convertLabelToName(tableName, label) {
+		var nameCat = await sqlManager.convertLabelToName(tableName, label);
 		return nameCat;
 	}
 	
 	/**
 	 * Convert the label into id from the table name specified
 	 * @param {table name where we want to get the name} tableName 
-	 * @param {identifier of the data which we want the label} id 
+	 * @param {identifier of the data which we want the id} label 
 	 */
-	async convertLabelToId(tableName, id) {
-		var idLevel = await sqlManager.convertLabelToId(tableName, id);
+	async convertLabelToId(tableName, label) {
+		var idLevel = await sqlManager.convertLabelToId(tableName, label);
 		return idLevel;
 	}
 
