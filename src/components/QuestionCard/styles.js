@@ -9,13 +9,18 @@ const styles = new StyleSheet.create({
 		padding: 20.0,
 		backgroundColor: Colors.BACKGROUND_COLOR,
 		borderRadius: 20.0,
-		marginVertical: 10.0,
+		marginVertical: 20.0,
 		marginHorizontal: 10.0
 	},
 	subcontainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		marginVertical: 5.0
+	},
+	title: {
+		fontSize: 18.0,
+		fontFamily: 'Montserrat-SemiBold',
+		color: Colors.PRIMARY_COLOR
 	},
 	subtitle: {
 		fontSize: 16.0,

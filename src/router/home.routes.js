@@ -1,10 +1,10 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import      React                    from 'react';
+import      { createStackNavigator } from '@react-navigation/stack';
 
-import HomeProvider from '../screens/Home/HomeProvider';
-import QuestionProvider from '../screens/Questions/QuestionProvider';
+import      HomeProvider             from '../screens/Home/HomeProvider';
+import      QuestionProvider         from '../screens/Questions/QuestionProvider';
 
-import * as screen_labels from '../screens/constants';
+import * as screen_labels            from '../screens/constants';
 
 const HomeStack = createStackNavigator();
 

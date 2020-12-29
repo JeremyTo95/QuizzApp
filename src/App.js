@@ -1,26 +1,29 @@
-import SQLite from 'react-native-sqlite-storage';
-import React from 'react';
-import { View, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Provider } from 'mobx-react';
-
 import 'react-native-gesture-handler';
 
-import RootStore from './models/RootStore';
-import * as Colors from './assets/Colors';
-import Router from './router';
+import      SQLite                  from 'react-native-sqlite-storage';
+
+import      React                   from 'react';
+import      { View, StatusBar }     from 'react-native';
+import      { NavigationContainer } from '@react-navigation/native';
+import      { Provider }            from 'mobx-react';
+
+
+import      RootStore               from './models/RootStore';
+import * as Colors                  from './assets/Colors';
+import      Router                  from './router';
 
 /**
  * Open the database
  */
-global.db = SQLite.openDatabase({
-	name: 'SQLite',
-	location: 'default',
-	createFromLocation: '~mydb.db'
-}, () => {},
-error => {
-	console.log("ERROR : " + error);
-});
+global.db = SQLite.openDatabase(
+	{
+		name:               'SQLite',
+		location:           'default',
+		createFromLocation: '~mydb.db'
+	}, 
+	() => {}, 
+	error => { console.log("ERROR : " + error); }
+);
 
 const rootStore = new RootStore();
 
@@ -29,7 +32,6 @@ const rootStore = new RootStore();
  */
 export default class App extends React.Component {
 	render() {
-		console.log('home');
 		return (
 			<Provider { ...rootStore.getStores() }>
 				<View style={{flex: 1}}>

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat-Light',
 		letterSpacing: 1,
 		fontWeight: 'normal',
-		color: Colors.TEXT_COLOR
+		color: Colors.TEXT_COLOR,
 	}
 });
 

@@ -9,6 +9,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		backgroundColor: Colors.BACKGROUND_COLOR
 	},
+	goBack: {
+		position: 'absolute',
+		paddingVertical: 40.0,
+		paddingHorizontal: 15.0,
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignItems: 'center',
+		width:100.0,
+	},
 	question_container: {
 		marginHorizontal: 30.0,
 		marginVertical: 10.0
@@ -79,6 +88,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10.0,
 		paddingHorizontal: 20.0,
 		borderRadius: 30.0,
+	},
+	btn_container: {
+		width: '100%',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginVertical: 20.0
 	},
 	anecdote_container: {
 		marginHorizontal: 20.0,

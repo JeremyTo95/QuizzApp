@@ -1,7 +1,7 @@
-import React from 'react';
+import React                    from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeRoutes from './home.routes';
+import HomeRoutes               from './home.routes';
 
 const RootStack = createStackNavigator();
 
@@ -13,9 +13,7 @@ const Router = () => {
 		<RootStack.Screen
 			name={'Home'}
 			component={ HomeRoutes }
-			options={{
-				headerShown: false
-			}}
+			options={{ headerShown: false }}
 		/>
 	</RootStack.Navigator>)
 }

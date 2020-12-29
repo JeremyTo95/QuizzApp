@@ -1,13 +1,12 @@
-import React from 'react';
-import HomeView from './HomeView';
+import React              from 'react';
+import HomeView           from './HomeView';
 
-import Menu, { MenuItem } from 'react-native-material-menu';
-import { Alert, Text } from 'react-native';
-import QuestionCard from '../../components/QuestionCard';
-import Button from '../../components/Button';
+import { MenuItem }       from 'react-native-material-menu';
+import { Alert }          from 'react-native';
+import QuestionCard       from '../../components/QuestionCard';
 
 import * as screen_labels from '../constants'
-import styles from '../../components/Title/styles';
+import      styles        from '../../components/Title/styles';
 
 /**
  * Home controller
@@ -16,8 +15,8 @@ export default class HomeController extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			labelMenuCat: "Animaux",
-			labelMenuLevel: "Débutant",
+			labelMenuCat: "Selectionner",
+			labelMenuLevel: "Selectionner",
 			menuCat: null,
 			menuLevel: null,
 			nbQuestions: 5,
@@ -25,8 +24,6 @@ export default class HomeController extends React.Component {
 			levels: [],
 			showAllQuestions: false,
 			showAllQuestionsLabel: "Afficher plus",
-			showAllScores: false,
-			showAllScoresLabel: "Afficher plus"
 		}
 	}
 
@@ -35,11 +32,11 @@ export default class HomeController extends React.Component {
 	 */
 	async componentDidMount() {
 		await this.props.viewModel.initData();
+
 		this.setState({
-			levels:  this.props.viewModel.getLevels(),
+			levels:     this.props.viewModel.getLevels(),
 			categories: this.props.viewModel.getCategories(),
-			questions: this.props.viewModel.getQuestions(),
-			scores: this.props.viewModel.getScores()
+			questions:  this.props.viewModel.getQuestions(),
 		});
 	}
 
@@ -99,12 +96,17 @@ export default class HomeController extends React.Component {
 			return (
 				this.state.categories.map(item => {
 					return (
-						<MenuItem key={ item['id'] } onPress={ () => this.hideMenuCat(item['label']) }>{ item['label'] }</MenuItem>
+						<MenuItem 
+							key={ item['id'] } 
+							onPress={ () => this.hideMenuCat(item['label']) } 
+						>
+							{ item['label'] }
+						</MenuItem>
 					)
 				})
 			)
 		} else {
-			console.log("NULL CATS");
+			console.error("NULL CATEGORIES");
 		}
 	}
 
@@ -127,7 +129,7 @@ export default class HomeController extends React.Component {
 				})
 			)
 		} else {
-			console.log("NULL LEVELS");
+			console.error("NULL LEVELS");
 		}
 	}
 
@@ -138,23 +140,7 @@ export default class HomeController extends React.Component {
 	updateQuestionNumber = (value) => {
 		if (value/100 < 1) {
 			if (value != "") this.setState({ nbQuestions: parseInt(value) });
-			else this.setState({ nbQuestions: "" });
-		}
-	}
-
-	/**
-	 * Build score history
-	 */
-	buildScoresHistory = () => {
-		var cpt = 0;
-		if (this.state.scores != null) {
-			return (
-				this.state.scores.map(item => {
-					cpt++;
-					if (this.state.showAllScores == true || cpt <= 5)
-						return (<Text key={ item['id'] }>{ item['label'] }</Text>);
-				})	
-			);
+			else             this.setState({ nbQuestions: "" });
 		}
 	}
 
@@ -168,12 +154,70 @@ export default class HomeController extends React.Component {
 				this.state.questions.map(item => {
 					cpt++;
 					if (this.state.showAllQuestions == true || cpt <= 5) {
-						return (<QuestionCard key={ item['id'] } question={ item } />);
-						// return (<Text style={styles.text} key={item['id']}>{item['label']}</Text>)
+						return (
+							<QuestionCard 
+								key={ item['id'] } 
+								question={ item } 
+							/>
+						);
 					}
 				})
 			);
 		}
+	}
+
+	/**
+	 * Refresh questions data : async function use by the refreshQuestionHistoric
+	 */
+	async refreshQuestionsHistoricAsync() {
+		await this.props.viewModel.initData();
+
+		this.setState({
+			levels:     this.props.viewModel.getLevels(),
+			categories: this.props.viewModel.getCategories(),
+			questions:  this.props.viewModel.getQuestions(),
+		});
+	}
+
+	/**
+	 * Refresh question data : use by the view button
+	 */
+	refreshQuestionsHistoric = () => {
+		this.refreshQuestionsHistoricAsync();
+	}
+
+
+	/**
+	 * Delete questions data : async function use by the deleteQuestionHistory
+	 */
+	async deleteQuestionsHistoryAsync() {
+		await this.props.viewModel.deleteQuestionsHistory();
+	}
+
+	/**
+	 * Delete question data : use by the long press view button
+	 */
+	async deleteQuestionsHistory() {
+		this.deleteQuestionsHistoryAsync();
+		this.refreshQuestionsHistoric();
+	}
+
+	deleteHistory = () => {
+		return (
+			Alert.alert(
+				"Attention : Demande de suppression des données",
+				"Vous avez appuyer longtemps sur le bouton actualiser. Cela à pour effet la demande de suppression des données",
+				[
+					{
+						text: "Annuler",   onPress: () => console.log("Annuler")
+					},
+					{
+						text: 'Confirmer', onPress: () => this.deleteQuestionsHistory()
+					}
+				],
+				{ cancelable: false }
+			)
+		)
 	}
 
 	/**
@@ -199,23 +243,12 @@ export default class HomeController extends React.Component {
 	}
 
 	/**
-	 * Manage the show more / less scores button
-	 */
-	showAllScores = () => {
-		var scoreState = this.state.showAllScores;
-		this.setState({
-			showAllScores: !scoreState,
-			showAllScoresLabel: (!scoreState) ? "Afficher moins" : "Afficher plus"
-		});
-	}
-
-	/**
 	 * Manage the show more / less questions button
 	 */
 	showAllQuestions = () => {
 		var questionState = this.state.showAllQuestions;
 		this.setState({
-			showAllQuestions: !questionState,
+			showAllQuestions:       !questionState,
 			showAllQuestionsLabel: (!questionState) ? "Afficher moins" : "Afficher plus"
 		});
 	}
@@ -223,25 +256,24 @@ export default class HomeController extends React.Component {
 	render() {
 		return (
 			<HomeView
-				setMenuCat={ this.setMenuCat }
-				showMenuCat={ this.showMenuCat }
-				hideMenuCat={ this.hideMenuCat }
-				labelMenuCat={ this.state.labelMenuCat }
-				buildSelectCategories={ this.buildSelectCategories }
-				setMenuLevel={ this.setMenuLevel }
-				showMenuLevel={ this.showMenuLevel }
-				hideMenuLevel={ this.hideMenuLevel }
-				labelMenuLevel={ this.state.labelMenuLevel }
-				buildSelectLevels={ this.buildSelectLevels }
-				nbQuestions={ this.state.nbQuestions }
-				updateQuestionNumber={ this.updateQuestionNumber }
-				startQuizz={ this.startQuizz }
-				buildScoresHistory={ this.buildScoresHistory }
-				buildQuestionsHistory={ this.buildQuestionsHistory }
-				showAllScores={ this.showAllScores }
-				showAllScoresLabel={ this.state.showAllScoresLabel }
-				showAllQuestions={ this.showAllQuestions }
-				showAllQuestionsLabel={ this.state.showAllQuestionsLabel }
+				setMenuCat=              { this.setMenuCat                  }
+				showMenuCat=             { this.showMenuCat                 }
+				hideMenuCat=             { this.hideMenuCat                 }
+				labelMenuCat=            { this.state.labelMenuCat          }
+				buildSelectCategories=   { this.buildSelectCategories       }
+				setMenuLevel=            { this.setMenuLevel                }
+				showMenuLevel=           { this.showMenuLevel               }
+				hideMenuLevel=           { this.hideMenuLevel               }
+				labelMenuLevel=          { this.state.labelMenuLevel        }
+				buildSelectLevels=       { this.buildSelectLevels           }
+				nbQuestions=             { this.state.nbQuestions           }
+				updateQuestionNumber=    { this.updateQuestionNumber        }
+				startQuizz=              { this.startQuizz                  }
+				buildQuestionsHistory=   { this.buildQuestionsHistory       }
+				showAllQuestions=        { this.showAllQuestions            }
+				showAllQuestionsLabel=   { this.state.showAllQuestionsLabel }
+				refreshQuestionsHistoric={ this.refreshQuestionsHistoric    }
+				deleteHistory=           { this.deleteHistory               }
 			/>
 		)
 	}

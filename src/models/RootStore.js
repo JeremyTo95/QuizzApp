@@ -1,4 +1,4 @@
-import HomeModel from './domain/HomeModel';
+import HomeModel     from './domain/HomeModel';
 import QuestionModel from './domain/QuestionModel';
 
 /**
@@ -9,7 +9,7 @@ class RootStore {
 	 * Model list
 	 */
 	static type = {
-		HOME_MODEL: 'homeModel',
+		HOME_MODEL:     'homeModel',
 		QUESTION_MODEL: 'questionModel'
 	}
 
@@ -22,7 +22,7 @@ class RootStore {
 	 * Return models
 	 */
 	getStores = () => ({
-		[RootStore.type.HOME_MODEL]: this.homeModel,
+		[RootStore.type.HOME_MODEL]:     this.homeModel,
 		[RootStore.type.QUESTION_MODEL]: this.questionModel
 	})
 }

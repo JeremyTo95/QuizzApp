@@ -1,7 +1,7 @@
-import React from 'react';
+import React                      from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import styles                     from './styles';
 
 /**
  * CustomButtom which could be :

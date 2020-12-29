@@ -1,11 +1,13 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import      React                                                      from 'react';
+import      { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import      Ionicons                                                   from 'react-native-vector-icons/Ionicons';
 
-import Title from '../../components/Title';
-import Subtitle from '../../components/Subtitle';
-import Button from '../../components/Button';
+import      Title    from '../../components/Title';
+import      Subtitle from '../../components/Subtitle';
+import      Button   from '../../components/Button';
 
-import styles from './styles';
+import      styles    from './styles';
+import * as Colors    from '../../assets/Colors';
 
 /**
  * Question View
@@ -20,10 +22,14 @@ export default class QuestionView extends React.Component {
 			controllerState,
 			selectAnswer,
 			validateAnswer,
+			goBack
 		} = this.props;
 		return (
 			<SafeAreaView style={ styles.container }>
 				<ScrollView>
+					<TouchableOpacity style={ styles.goBack } onPress={ () => goBack() }>
+						<Ionicons name={ 'arrow-back-outline' } size={ 35 } color={ Colors.TEXT_COLOR } /> 
+					</TouchableOpacity>
 					<Title title={ "Question N°" + controllerState.questionNumber }  />
 					<Subtitle subtitle={ "Score : " + controllerState.score } />
 					<View style={ styles.question_container }>

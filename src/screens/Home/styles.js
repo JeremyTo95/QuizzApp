@@ -55,11 +55,21 @@ const styles = StyleSheet.create({
 	},
 	history_container: {
 		flex: 1,
+		minHeight: 400,
 		backgroundColor: Colors.ACCENT_COLOR,
-		// borderRadius: 65.0,
 		borderTopLeftRadius: 65.0,
 		borderTopRightRadius: 65.0,
 		paddingTop: 20.0
+	},
+	header_container: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginRight: 20.0
+	},
+	refresh_btn: {
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });
 

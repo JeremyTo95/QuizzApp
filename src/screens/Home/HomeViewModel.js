@@ -13,6 +13,10 @@ export default class HomeViewModel {
 		await this.store.initData();
 	}
 
+	async deleteQuestionsHistory() {
+		await this.store.deleteQuestionsHistory();
+	}
+
 	/**
 	 * Convert the id into label for the given tablename
 	 * @param {Table name where we want data} tableName 
@@ -49,12 +53,5 @@ export default class HomeViewModel {
 	 */
 	getQuestions() {
 		return this.store.getQuestions();
-	}
-
-	/**
-	 * Get scores
-	 */
-	getScores() {
-		return this.store.getScores();
 	}
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import SQLite from 'react-native-sqlite-storage';
 
 /**
@@ -18,12 +18,12 @@ export default class SQLiteManager extends React.Component {
 	 */
 	ExecuteQuery = (sql, params = []) => new Promise((resolve, reject) => {
 		db.transaction((trans) => {
-			trans.executeSql(sql, params, (trans, results) => {
-				resolve(results);
-			},
-			(error) => {
-				reject(error);
-			});
+			trans.executeSql(
+				sql, 
+				params, 
+				(trans, results) => { resolve(results); }, 
+				(error) => { reject(error); }
+			);
 		});
 	});
 
@@ -32,8 +32,8 @@ export default class SQLiteManager extends React.Component {
 	 * @param {Table name where we want to select data} tableName 
 	 */
 	async selectTable(tableName) {
-		let select = await this.ExecuteQuery("SELECT * FROM " + tableName,  []);
-		var rows = select.rows;
+		let select = await this.ExecuteQuery("SELECT * FROM " + tableName + " ORDER BY id DESC",  []);
+		var rows   = select.rows;
 		return rows.raw();
 	}
 
@@ -44,8 +44,8 @@ export default class SQLiteManager extends React.Component {
 	 */
 	async convertLabelToName(tableName, label) {
 		let nameSQL = await this.ExecuteQuery("SELECT name FROM " + tableName + " WHERE label = '" + label + "'", []);
-		var rows = nameSQL.rows;
-		var name = rows.raw();
+		var rows    = nameSQL.rows;
+		var name    = rows.raw();
 		return name[0]['name'];
 	}
 
@@ -56,8 +56,8 @@ export default class SQLiteManager extends React.Component {
 	 */
 	async convertLabelToId(tableName, label) {
 		let idSQL = await this.ExecuteQuery("SELECT id FROM " + tableName + " WHERE label = '" + label + "'", []);
-		var rows = idSQL.rows;
-		var id = rows.raw();
+		var rows  = idSQL.rows;
+		var id    = rows.raw();
 		return id[0]['id'];
 	}
 
@@ -68,9 +68,33 @@ export default class SQLiteManager extends React.Component {
 	 */
 	async convertIdToLabel(tableName, id) {
 		let labelSQL = await this.ExecuteQuery("SELECT label FROM " + tableName + " WHERE id = " + id, []);
-		var rows = labelSQL.rows;
-		var label = rows.raw();
+		var rows     = labelSQL.rows;
+		var label    = rows.raw();
 		return label[0]['label'];
+	}
+
+	/**
+	 * Shuffle the array
+	 * @param {Array to shuffle} array 
+	 */
+	shuffleArray(array) {
+		let curId = array.length;
+
+		while (0 !== curId) {
+			let randId    = Math.floor(Math.random() * curId);
+			curId         -= 1;
+			let tmp       = array[curId];
+			array[curId]  = array[randId];
+			array[randId] = tmp;
+		}
+		return array;
+	}
+
+	/**
+	 * Delete the questions in database
+	 */
+	async deleteQuestionsHistory() {
+		await this.ExecuteQuery("DELETE FROM QUESTIONS", []);
 	}
 
 	/**
@@ -87,12 +111,12 @@ export default class SQLiteManager extends React.Component {
 		var answers  = {};			// initialisation of the answers variable
 
 		JSON.parse(dataStr, (k, v) => {									// Setup of the variables with the data
-			if      (k == 'categorie')                cat                   = v;
-			else if (k == 'theme')                    theme                 = v;
-			else if (k == 'difficulte')               level                 = v;
-			else if (k == 'question')                 question              = v;
-			else if (k == 'reponse_correcte')         answer                = v;
-			else if (k == 'anecdote')                 anecdote              = v;
+			if      (k == 'categorie')                cat        = v;
+			else if (k == 'theme')                    theme      = v;
+			else if (k == 'difficulte')               level      = v;
+			else if (k == 'question')                 question   = v;
+			else if (k == 'reponse_correcte')         answer     = v;
+			else if (k == 'anecdote')                 anecdote   = v;
 			else if (k == 0 && typeof(v) == 'string') answers[k] = v;
 			else if (k == 1 && typeof(v) == 'string') answers[k] = v;
 			else if (k == 2 && typeof(v) == 'string') answers[k] = v;
@@ -109,7 +133,9 @@ export default class SQLiteManager extends React.Component {
 		idLevel                 = idLevel[0].id;
 
 		const insertQuestionSQL = "INSERT INTO QUESTIONS(idCategory, idLevel, label, anecdote, theme, answer, answers) VALUES (?, ?, ?, ?, ?, ?, ?)"; 		// Insert question query
-		let questionInsert = await this.ExecuteQuery(insertQuestionSQL, [idCategory, idLevel, question, anecdote, theme, answer, JSON.stringify(answers)]);	// Execution
+		var answersJSON         = this.shuffleArray([answers['0'], answers['1'], answers['2'], answers['3']]);
+		let questionInsert      = await this.ExecuteQuery(insertQuestionSQL, [idCategory, idLevel, question, anecdote, theme, answer, JSON.stringify(answersJSON)]);	// Execution
+		
 		if (questionInsert['rowsAffected'] == 1) console.info("Row inserted");	// Debug info console
 		else console.error("Error insert question")    						// Debug info console
 	}

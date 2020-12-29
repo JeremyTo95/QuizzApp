@@ -1,10 +1,10 @@
-import React from 'react';
-import { Alert } from 'react-native';
+import      React         from 'react';
+import      { Alert }     from 'react-native';
 
-import sqlManager from '../../data/SQLite';
-import QuestionView from './QuestionView';
+import      QuestionView  from './QuestionView';
 
-import styles from './styles';
+import * as DataConstants from '../../data/constants';
+import      styles        from './styles';
 
 /**
  * Question controller
@@ -45,11 +45,10 @@ export default class QuestionController extends React.Component {
 		var nameCat = await this.props.viewModel.convertLabelToName("Categories", this.state.cat);
 		var idLevel = await this.props.viewModel.convertLabelToId("Levels", this.state.level);
 		this.setState({
-			cat: nameCat,
+			cat:   nameCat,
 			level: idLevel,
 		});
 		this.nextQuestion();
-		console.log(this.state);
 	}
 
 	/**
@@ -57,6 +56,7 @@ export default class QuestionController extends React.Component {
 	 */
 	async setNewQuestion() {
 		await this.props.viewModel.setQuestion(this.state.cat, this.state.level);
+		
 		this.setState({
 			question:    this.props.viewModel.getQuestion(),
 			answer:      this.props.viewModel.getAnswer(),
@@ -74,36 +74,35 @@ export default class QuestionController extends React.Component {
 	 */
 	nextQuestion = () => {
 		var date = new Date();
-		// console.log(this.state.secondes, date.getMinutes()*60 + date.getSeconds());
-		if (this.state.secondes < date.getMinutes()*60 + date.getSeconds()) { // condition d'accès à la nouvelle requête
+		
+		if (this.state.secondes < date.getHours()*60*60 + date.getMinutes()*60 + date.getSeconds()) { // condition d'accès à la nouvelle requête
 			this.setState({ isLock: false });
 			this.state.isLock = false;
 		}
 		if (this.state.isLock) {
 			// Check de la minute pour faire la nouvelle requete API
 			this.setState({
-				stateNextQuestion: "Il y a une minute d'attente entre chaque question (" + (this.state.secondes - (date.getMinutes()*60 + date.getSeconds()) + "s restantes)"),
-				buttonLabel: "Suivant"
+				stateNextQuestion: "Il y a une minute d'attente entre chaque question (" + (this.state.secondes - (date.getHours()*60*60 + date.getMinutes()*60 + date.getSeconds()) + "s restantes)"),
+				buttonLabel:       "Suivant"
 			});
 		} else {
 			// Engage la minute d'attente pour l'API
-			var qn = this.state.questionNumber;
-			qn++;
+			var qn = this.state.questionNumber + 1;
 			this.setState({ stateNextQuestion: '' });
 			this.setNewQuestion();
 			this.setState({
-				stateNextQuestion: '',
-				buttonLabel: "Confirmer",
-				secondes: date.getMinutes()*60 + date.getSeconds() + 45,
-				isLock: true,
-				isConfirm: false,
-				questionNumber: qn,
+				stateNextQuestion:    '',
+				buttonLabel:          "Confirmer",
+				secondes:             date.getHours()*60*60 + date.getMinutes()*60 + date.getSeconds() + 60,
+				isLock:               true,
+				isConfirm:            false,
+				questionNumber:       qn,
 				styleAnswerSelector1: styles.answerSelector,
 				styleAnswerSelector2: styles.answerSelector,
 				styleAnswerSelector3: styles.answerSelector,
 				styleAnswerSelector4: styles.answerSelector,
-				userAnswer: undefined,
-				userAnswerIndex: undefined
+				userAnswer:           undefined,
+				userAnswerIndex:      undefined
 			});
 		}
 	}
@@ -113,14 +112,14 @@ export default class QuestionController extends React.Component {
 	 * @param {Answer Index which is about} answerIndex 
 	 */
 	selectAnswer = (answerIndex) => {							// OK : Fonction confirmé
-		if (!this.state.isConfirm) {							// Vérifie que la question n'a pas été répondu
+		if (!this.state.isConfirm && this.state.question != DataConstants.GO_BACK_MSG) {							// Vérifie que la question n'a pas été répondu
 			this.setState({
-				styleAnswerSelector1: styles.answerSelector,		// Initialisation du style de la proposition 1
-				styleAnswerSelector2: styles.answerSelector,		// Initialisation du style de la proposition 2
-				styleAnswerSelector3: styles.answerSelector,		// Initialisation du style de la proposition 3
-				styleAnswerSelector4: styles.answerSelector,		// Initialisation du style de la proposition 4
-				userAnswer: this.state.answer[answerIndex],		// Stockage de la réponse dans le state
-				userAnswerIndex: answerIndex					// Stockage de l'index de la réponse dans le state
+				styleAnswerSelector1: styles.answerSelector,				// Initialisation du style de la proposition 1
+				styleAnswerSelector2: styles.answerSelector,				// Initialisation du style de la proposition 2
+				styleAnswerSelector3: styles.answerSelector,				// Initialisation du style de la proposition 3
+				styleAnswerSelector4: styles.answerSelector,				// Initialisation du style de la proposition 4
+				userAnswer:           this.state.answer[answerIndex],		// Stockage de la réponse dans le state
+				userAnswerIndex:      answerIndex						// Stockage de l'index de la réponse dans le state
 			});
 			if (answerIndex == 0) this.setState({ styleAnswerSelector1: styles.answerSelectorSelected });	// Affiche le selecteur à coté la réponse 1 en témoin
 			if (answerIndex == 1) this.setState({ styleAnswerSelector2: styles.answerSelectorSelected });	// Affiche le selecteur à coté la réponse 2 en témoin
@@ -133,31 +132,31 @@ export default class QuestionController extends React.Component {
 	 * Function wich is use when the confirm button is use
 	 */
 	validateAnswer = () => {
-		console.log(this.state.nbQuestions, this.state.questionNumber);
-		if (this.state.userAnswerIndex == undefined) {											// Vérifie qu'une réponse à été donné par l'utilisateur
+		if (this.state.question == DataConstants.GO_BACK_MSG) {
+			this.setState({ stateNextQuestion: "Retourner sur le menu d'acceuil" })
+		} else if (this.state.userAnswerIndex == undefined) {													// Vérifie qu'une réponse à été donné par l'utilisateur
 			this.setState({ stateNextQuestion: "Veuillez entrer une solution avant de confirmer !" })
 		} else {
-			if (this.state.isConfirm == false) {												// Vérifie que la question n'a pas encore été confirmé
+			if (this.state.isConfirm == false) {															// Vérifie que la question n'a pas encore été confirmé
 				if (this.state.answerIndex == 0) this.setState({ styleAnswerSelector1: styles.answerSelectorTrue });	// Affiche la bonne réponse
 				if (this.state.answerIndex == 1) this.setState({ styleAnswerSelector2: styles.answerSelectorTrue });	// Affiche la bonne réponse
 				if (this.state.answerIndex == 2) this.setState({ styleAnswerSelector3: styles.answerSelectorTrue });	// Affiche la bonne réponse
 				if (this.state.answerIndex == 3) this.setState({ styleAnswerSelector4: styles.answerSelectorTrue });	// Affiche la bonne réponse
 				
-				if (this.state.userAnswerIndex == this.state.answerIndex) {  						// Gestion du score
-					var score = this.state.score;
-					score++;
+				if (this.state.userAnswerIndex == this.state.answerIndex) {  									// Gestion du score
+					var score = this.state.score + 1;
 					this.setState({ score: score })
 					this.state.score = score;
 				}
 
-				if (this.state.questionNumber < this.state.nbQuestions) {							// Continue while the quizz is not over
-					this.setState({														// Sauvegarde de l'état de la question
-						isConfirm: true,
+				if (this.state.questionNumber < this.state.nbQuestions) {										// Continue while the quizz is not over
+					this.setState({																	// Sauvegarde de l'état de la question
+						isConfirm:   true,
 						buttonLabel: "Suivant"
 					});
-				} else {																	// Terminate the quizz and set the popup result screen
+				} else {																				// Terminate the quizz and set the popup result screen
 					this.setState({
-						isConfirm: true,
+						isConfirm:   true,
 						buttonLabel: "Terminer"
 					});
 					Alert.alert(
@@ -171,19 +170,23 @@ export default class QuestionController extends React.Component {
 						{ cancelable: false }
 					)
 				}
-
 			} else {
 				this.nextQuestion();
 			}
 		} 
 	}
 
+	goBack = () => {
+		this.props.rootProps.navigation.pop()
+	}
+
 	render() {
 		return (
 			<QuestionView 
-				selectAnswer={ this.selectAnswer }
-				validateAnswer={ this.validateAnswer }
-				controllerState={ this.state }
+				selectAnswer=   { this.selectAnswer   }
+				validateAnswer= { this.validateAnswer }
+				controllerState={ this.state          }
+				goBack=         { this.goBack         }
 			/>
 		)
 	}

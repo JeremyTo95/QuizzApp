@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, View, Text, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Menu, { MenuItem } from 'react-native-material-menu';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Title from '../../components/Title';
@@ -30,12 +30,11 @@ export default class HomeView extends React.Component {
 			nbQuestions,
 			updateQuestionNumber,
 			startQuizz,
-			buildScoresHistory,
 			buildQuestionsHistory,
-			showAllScores,
-			showAllScoresLabel,
 			showAllQuestions,
-			showAllQuestionsLabel
+			showAllQuestionsLabel,
+			refreshQuestionsHistoric,
+			deleteHistory
 		} = this.props;
 
 		return (
@@ -76,41 +75,34 @@ export default class HomeView extends React.Component {
 								<Text style={ styles.text_cat }>Questions (entre 1 et 10) : </Text>
 								<TextInput 
 									keyboardType="numeric"
-									onChangeText={ updateQuestionNumber }
-									value={ nbQuestions.toString() }
-									style={ styles.text }
+									onChangeText={ updateQuestionNumber   }
+									value=       { nbQuestions.toString() }
+									style=       { styles.text            }
 								/>
 							</View>
 						</View>
 						<View style={ styles.btn_container }>
 							<Button 
-								text="Commencer"
-								action={ startQuizz }
-								isRaised={ true }
+								text=    "Commencer"
+								action=  { startQuizz }
+								isRaised={ true       }
 							/>
 						</View>
 					</View>
 					<View style={ styles.history_container }>
-						<View style={ styles.scores_container }>
-							<Subtitle subtitle="Les Scores" />
-							<View>
-								{ buildScoresHistory() }
-								<Button 
-									text={ showAllScoresLabel } 
-									action={ showAllScores } 
-									isFlat={ true }
-								/>
-							</View>
-						</View>
-
 						<View style={ styles.questions_container }>
-							<Subtitle subtitle="Les Questions" />
+							<View style={ styles.header_container }>
+								<Subtitle subtitle="Historique des questions" isCenter={ false } />
+								<TouchableOpacity style={ styles.refresh_btn } onLongPress={ deleteHistory } onPress={ refreshQuestionsHistoric } >
+									<Ionicons name='refresh-outline' size={40} color={ Colors.TEXT_COLOR } />
+								</TouchableOpacity>
+							</View>
 							<View>
 								{ buildQuestionsHistory() }
 								<Button 
-									text={ showAllQuestionsLabel } 
-									action={ showAllQuestions } 
-									isFlat={ true }
+									text=  { showAllQuestionsLabel } 
+									action={ showAllQuestions      } 
+									isFlat={ true                  }
 								/>
 							</View>
 						</View>

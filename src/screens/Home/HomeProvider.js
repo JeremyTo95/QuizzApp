@@ -12,7 +12,7 @@ class HomeProvider extends React.Component {
 	constructor(props) {
 		super (props);
 		const homeViewModel = props[RootStore.type.HOME_MODEL];
-		this.viewModel = new HomeViewModel(homeViewModel);
+		this.viewModel      = new HomeViewModel(homeViewModel);
 	}
 
 	render() {

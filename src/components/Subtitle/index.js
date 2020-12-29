@@ -1,7 +1,7 @@
-import React from 'react';
+import React          from 'react';
 import { View, Text } from 'react-native';
 
-import styles from './styles';
+import styles         from './styles';
 
 /**
  * Subtitle
@@ -9,9 +9,10 @@ import styles from './styles';
  */
 export default class Subtitle extends React.Component {
         render() {
+                const { subtitle, isCenter } = this.props;
                 return(
                         <View style={styles.container}>
-                                <Text style={ styles.title }>{ this.props.subtitle }</Text>
+                                <Text style={ Object.assign({},styles.title, (isCenter) ? { textAlign: 'center' } : {})  }>{ subtitle }</Text>
                         </View>
                 );
         }

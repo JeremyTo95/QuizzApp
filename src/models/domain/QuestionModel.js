@@ -1,7 +1,8 @@
-import { observable, action } from 'mobx';
-import apiManager from '../../data/API';
-import sqlManager from '../../data/SQLite'
-import * as TableNames from '../../data/SQLite/constants';
+import      { observable } from 'mobx';
+import      apiManager     from '../../data/API';
+import      sqlManager     from '../../data/SQLite'
+import * as TableNames     from '../../data/SQLite/constants';
+import * as DataConstants  from '../../data/constants';
 
 /**
  * Question Model
@@ -22,11 +23,12 @@ export default class QuestionModel {
 	 */
 	shuffleArray(array) {
 		let curId = array.length;
+
 		while (0 !== curId) {
 			let randId = Math.floor(Math.random() * curId);
 			curId -= 1;
-			let tmp = array[curId];
-			array[curId] = array[randId];
+			let tmp       = array[curId];
+			array[curId]  = array[randId];
 			array[randId] = tmp;
 		}
 		return array;
@@ -42,6 +44,7 @@ export default class QuestionModel {
 	async setQuestion(cat, level, answers = 4, anec = 1) {
 		var response     = await apiManager.GetQuery(cat, level, answers, anec);
 		var responseJSON = JSON.parse(response);
+
 		if (responseJSON['response_code'] == 0) {
 			this.question    = responseJSON['results'][0]['question'];
 			this.answer      = responseJSON['results'][0]['reponse_correcte'];
@@ -50,6 +53,10 @@ export default class QuestionModel {
 			this.answers     = this.shuffleArray(this.answers);
 			sqlManager.insertQuestion(response);
 		} else {
+			this.question    = DataConstants.GO_BACK_MSG;
+			this.answer      = "";
+			this.answers     = "";
+			this.anecdote    = "";
 			console.info('Wait the entire minute before to restart');
 		}
 	}
@@ -60,7 +67,7 @@ export default class QuestionModel {
 	 */
 	async getQuestionById(id) {
 		var response = await sqlManager.ExecuteQuery("SELECT * FROM " + TableNames.QUESTIONS + " WHERE id = " + id, []);
-		var raws = response.raws;
+		var raws     = response.raws;
 		return raws.row();
 	}
 
@@ -102,10 +109,10 @@ export default class QuestionModel {
 	 * Return the index of the answer from the list of answer
 	 */
 	getAnswerIndex() {
-		for (let i = 0; i < this.answers.length; i++) {
-			console.log(this.answers[i], this.answer);
-			if (this.answers[i] == this.answer) return i;
-		}
+		for (let i = 0; i < this.answers.length; i++) 
+			if (this.answers[i] == this.answer) 
+				return i;
+		
 		return -1;
 	}
 
