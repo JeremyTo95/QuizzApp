@@ -5,7 +5,8 @@ import styles         from './styles';
 
 /**
  * Subtitle
- * { Subtitle to show } subtitle
+ * @constructor
+ * @param { string } subtitle - Subtitle to show
  */
 export default class Subtitle extends React.Component {
         render() {

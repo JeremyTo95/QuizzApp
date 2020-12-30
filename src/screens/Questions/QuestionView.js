@@ -11,6 +11,11 @@ import * as Colors    from '../../assets/Colors';
 
 /**
  * Question View
+ * @constructor
+ * @param { state    } controllerState - State of the controller
+ * @param { Function } selectAnswer    - Select answer function
+ * @param { Function } validateAnswer  - Validate answer function
+ * @param { Function } goBack          - Go back in navigation function
  */
 export default class QuestionView extends React.Component {
 	constructor(props) {
@@ -27,10 +32,10 @@ export default class QuestionView extends React.Component {
 		return (
 			<SafeAreaView style={ styles.container }>
 				<ScrollView>
+					<Title title={ "Question N°" + controllerState.questionNumber }  />
 					<TouchableOpacity style={ styles.goBack } onPress={ () => goBack() }>
 						<Ionicons name={ 'arrow-back-outline' } size={ 35 } color={ Colors.TEXT_COLOR } /> 
 					</TouchableOpacity>
-					<Title title={ "Question N°" + controllerState.questionNumber }  />
 					<Subtitle subtitle={ "Score : " + controllerState.score } />
 					<View style={ styles.question_container }>
 						<Text style={ styles.question_content }>{ controllerState.question }</Text>

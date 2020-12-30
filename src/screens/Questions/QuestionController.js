@@ -8,6 +8,9 @@ import      styles        from './styles';
 
 /**
  * Question controller
+ * @constructor
+ * @param { props             } rootProps - Props of the provider
+ * @param { QuestionViewModel } viewModel - QuestionViewModel
  */
 export default class QuestionController extends React.Component {
 	constructor(props) {
@@ -40,6 +43,7 @@ export default class QuestionController extends React.Component {
 
 	/**
 	 * Initialize the data
+	 * @function
 	 */
 	async componentDidMount() {
 		var nameCat = await this.props.viewModel.convertLabelToName("Categories", this.state.cat);
@@ -53,6 +57,7 @@ export default class QuestionController extends React.Component {
 
 	/**
 	 * This function load question and set it in the QuestionController state
+	 * @function
 	 */
 	async setNewQuestion() {
 		await this.props.viewModel.setQuestion(this.state.cat, this.state.level);
@@ -71,6 +76,7 @@ export default class QuestionController extends React.Component {
 	 * 	- timeout to request API (60s)
 	 * 	- variable reset for next question
 	 * 	- initialize new question  
+	 * @function
 	 */
 	nextQuestion = () => {
 		var date = new Date();
@@ -109,7 +115,8 @@ export default class QuestionController extends React.Component {
 
 	/**
 	 * Update the state of selected answer and show the selector next to the answer
-	 * @param {Answer Index which is about} answerIndex 
+	 * @function
+	 * @param { Integer } answerIndex - Answer Index which is about 
 	 */
 	selectAnswer = (answerIndex) => {							// OK : Fonction confirmé
 		if (!this.state.isConfirm && this.state.question != DataConstants.GO_BACK_MSG) {							// Vérifie que la question n'a pas été répondu
@@ -130,6 +137,7 @@ export default class QuestionController extends React.Component {
 
 	/**
 	 * Function wich is use when the confirm button is use
+	 * @function
 	 */
 	validateAnswer = () => {
 		if (this.state.question == DataConstants.GO_BACK_MSG) {
@@ -176,6 +184,10 @@ export default class QuestionController extends React.Component {
 		} 
 	}
 
+	/**
+	 * Go back with the navigation
+	 * @function
+	 */
 	goBack = () => {
 		this.props.rootProps.navigation.pop()
 	}

@@ -1,5 +1,7 @@
 /**
  * Home View Model
+ * @constructor
+ * @param { HomeModel } homeStore - Home Model
  */
 export default class HomeViewModel {
 	constructor(homeStore) {
@@ -8,19 +10,25 @@ export default class HomeViewModel {
 
 	/**
 	 * Initialize data
+	 * @function
 	 */
 	async initData() {
 		await this.store.initData();
 	}
 
+	/**
+	 * Delete the question history
+	 * @function
+	 */
 	async deleteQuestionsHistory() {
 		await this.store.deleteQuestionsHistory();
 	}
 
 	/**
 	 * Convert the id into label for the given tablename
-	 * @param {Table name where we want data} tableName 
-	 * @param {Identifier of the data which we want the label} id 
+	 * @function
+	 * @param { string } tableName - Table name where we want data 
+	 * @param { Integer } id - Identifier of the data which we want the label 
 	 */
 	async convertIdToLabel(tableName, id) {
 		var label = await this.store.convertIdToLabel(tableName, id);
@@ -29,6 +37,7 @@ export default class HomeViewModel {
 
 	/**
 	 * Get categories
+	 * @function
 	 */
 	getCategories() {
 		return this.store.getCategories();
@@ -36,6 +45,7 @@ export default class HomeViewModel {
 
 	/**
 	 * Get levels
+	 * @function
 	 */
 	getLevels() {
 		return this.store.getLevels();
@@ -43,6 +53,7 @@ export default class HomeViewModel {
 
 	/**
 	 * Get number of question
+	 * @function
 	 */
 	getNbQuestions() {
 		return this.store.getNbQuestions();
@@ -50,6 +61,7 @@ export default class HomeViewModel {
 
 	/**
 	 * Get questions
+	 * @function
 	 */
 	getQuestions() {
 		return this.store.getQuestions();

@@ -11,6 +11,24 @@ import styles from './styles';
 
 /**
  * Home View
+ * @constructor
+ * @param { Function } setMenuCat               - Function to set category menu
+ * @param { Function } showMenuCat              - Function to show category menu
+ * @param { string   } labelMenuCat             - Label of category dropdown
+ * @param { Function } buildSelectCategories    - Function to build category menu
+ * @param { Function } setMenuLevel             - Function to set level menu
+ * @param { Function } showMenuLevel            - Function to show level menu
+ * @param { string   } labelMenuLevel           - Label of level dropdown menu
+ * @param { Function } buildSelectLevels        - Function to build level menu
+ * @param { Integer  } nbQuestions              - Number of questions
+ * @param { Function } updateQuestionNumber     - Function to update number of questions
+ * @param { Function } startQuizz               - Function to start the quizz
+ * @param { Function } buildQuestionsHistory    - Function to build the question history (show only 5 at the begining)
+ * @param { Function } showAllQuestions         - Function to show all questions
+ * @param { string   } showAllQuestionsLabel    - Label of showw all button
+ * @param { Function } refreshQuestionsHistoric - Function to refresh question data to make history
+ * @param { Function } deleteHistory            - Function to delete the question history
+ * 
  */
 export default class HomeView extends React.Component {
 	constructor(props) {

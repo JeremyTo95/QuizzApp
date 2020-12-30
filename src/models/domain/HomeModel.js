@@ -4,6 +4,7 @@ import * as TableNames from '../../data/SQLite/constants';
 
 /**
  * Home Model
+ * @constructor
  */
 export default class HomeModel {
 	@observable categories  = [];
@@ -12,6 +13,7 @@ export default class HomeModel {
 
 	/**
 	 * Setup categories
+	 * @function
 	 */
 	async setCategories() {
 		this.categories = await sqlManager.selectTable(TableNames.CATEGORIES);
@@ -19,6 +21,7 @@ export default class HomeModel {
 
 	/**
 	 * Setup levels
+	 * @function
 	 */
 	async setLevels() {
 		this.levels     = await sqlManager.selectTable(TableNames.LEVELS);
@@ -26,6 +29,7 @@ export default class HomeModel {
 
 	/**
 	 * Setup questions
+	 * @function
 	 */
 	async setQuestions() {
 		this.questions  = await sqlManager.selectTable(TableNames.QUESTIONS);
@@ -40,8 +44,9 @@ export default class HomeModel {
 
 	/**
 	 * Convert the id into label
-	 * @param {Table name where we want to get data} tableName 
-	 * @param {Identifier which match with the label} id 
+	 * @function
+	 * @param { string  } tableName - Table name where we want to get data 
+	 * @param { Integer } id        - Identifier which match with the label 
 	 */
 	async convertIdToLabel(tableName, id) {
 		var res = await sqlManager.convertIdToLabel(tableName, id);
@@ -50,6 +55,7 @@ export default class HomeModel {
 
 	/**
 	 * Initialize the data
+	 * @function
 	 */
 	async initData() {
 		await this.setCategories();
@@ -59,6 +65,7 @@ export default class HomeModel {
 
 	/**
 	 * Delete the questions in database
+	 * @function
 	 */
 	async deleteQuestionsHistory() {
 		await sqlManager.deleteQuestionsHistory();
@@ -66,6 +73,7 @@ export default class HomeModel {
 
 	/**
 	 * Get categories
+	 * @function
 	 */
 	getCategories() {
 		return this.categories;
@@ -73,6 +81,7 @@ export default class HomeModel {
 
 	/**
 	 * Get levels
+	 * @function
 	 */
 	getLevels() {
 		return this.levels;
@@ -80,6 +89,7 @@ export default class HomeModel {
 
 	/**
 	 * Get questions count
+	 * @function
 	 */
 	getNbQuestions() {
 		return this.nbQuestions;
@@ -87,6 +97,7 @@ export default class HomeModel {
 
 	/**
 	 * Get questions
+	 * @function
 	 */
 	getQuestions() {
 		return this.questions;

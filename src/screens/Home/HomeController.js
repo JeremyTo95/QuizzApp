@@ -10,6 +10,9 @@ import      styles        from '../../components/Title/styles';
 
 /**
  * Home controller
+ * @constructor
+ * @param { HomeViewModel    } viewModel - HomeViewModel
+ * @param { NavigationObject } nav       - Provider navigation object
  */
 export default class HomeController extends React.Component {
 	constructor(props) {
@@ -29,6 +32,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Initialization data 
+	 * @function
 	 */
 	async componentDidMount() {
 		await this.props.viewModel.initData();
@@ -42,7 +46,8 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Define the reference category menu for dropdown
-	 * @param { Ref menu } ref 
+	 * @function
+	 * @param { Object } ref - Ref menu 
 	 */
 	setMenuCat = ref => { 
 		this.setState({ menuCat: ref }) 
@@ -50,7 +55,8 @@ export default class HomeController extends React.Component {
 	
 	/**
 	 * Hide category menu 
-	 * @param {new label value} value 
+	 * @function
+	 * @param { string } value - new label value 
 	 */
 	hideMenuCat = (value) => {
 		this.setState({ labelMenuCat: value, })
@@ -59,6 +65,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Show category menu
+	 * @function
 	 */
 	showMenuCat = () => { 
 		this.state.menuCat.show(); 
@@ -66,7 +73,8 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Define the reference level menu
-	 * @param {Ref menu} ref 
+	 * @function
+	 * @param { Object } ref - Ref menu 
 	 */
 	setMenuLevel = ref => { 
 		this.setState({ menuLevel: ref }) 
@@ -74,7 +82,8 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Hide the level menu
-	 * @param {new label value} value 
+	 * @function
+	 * @param { string } value - new label value 
 	 */
 	hideMenuLevel = (value) => {
 		this.setState({ labelMenuLevel: value, })
@@ -83,6 +92,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Show level menu
+	 * @function
 	 */
 	showMenuLevel = () => { 
 		this.state.menuLevel.show(); 
@@ -90,6 +100,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Build select categories options for dropdown menu
+	 * @function
 	 */
 	buildSelectCategories = () => {
 		if (this.state.categories != null) {
@@ -112,6 +123,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Build select levels options for dropdown menu
+	 * @function
 	 */
 	buildSelectLevels = () => {
 		if (this.state.levels != null) {
@@ -135,7 +147,8 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Update the question number
-	 * @param {new question number} value 
+	 * @function
+	 * @param { Integer } value - new question number 
 	 */
 	updateQuestionNumber = (value) => {
 		if (value/100 < 1) {
@@ -146,7 +159,8 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Share question
-	 * @param {Question to share} question 
+	 * @function
+	 * @param { JSON Object } question - Question to share 
 	 */
 	async shareQuestion(question) {
 		console.log(question);
@@ -169,6 +183,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Build question history
+	 * @function
 	 */
 	buildQuestionsHistory = () => {
 		var cpt = 0;
@@ -192,6 +207,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Refresh questions data : async function use by the refreshQuestionHistoric
+	 * @function
 	 */
 	async refreshQuestionsHistoricAsync() {
 		await this.props.viewModel.initData();
@@ -205,6 +221,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Refresh question data : use by the view button
+	 * @function
 	 */
 	refreshQuestionsHistoric = () => {
 		this.refreshQuestionsHistoricAsync();
@@ -213,6 +230,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Delete questions data : async function use by the deleteQuestionHistory
+	 * @function
 	 */
 	async deleteQuestionsHistoryAsync() {
 		await this.props.viewModel.deleteQuestionsHistory();
@@ -220,12 +238,17 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Delete question data : use by the long press view button
+	 * @function
 	 */
 	async deleteQuestionsHistory() {
 		this.deleteQuestionsHistoryAsync();
 		this.refreshQuestionsHistoric();
 	}
 
+	/**
+	 * Delete the questions history
+	 * @function
+	 */
 	deleteHistory = () => {
 		return (
 			Alert.alert(
@@ -246,6 +269,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Start quizz (check also that the configuration is correct)
+	 * @function
 	 */
 	startQuizz = () => {
 		if (this.state.nbQuestions >= 1 && this.state.nbQuestions <= 10 && this.state.labelMenuCat != "Selectionner" && this.state.labelMenuLevel != "Selectionner") {
@@ -268,6 +292,7 @@ export default class HomeController extends React.Component {
 
 	/**
 	 * Manage the show more / less questions button
+	 * @function
 	 */
 	showAllQuestions = () => {
 		var questionState = this.state.showAllQuestions;

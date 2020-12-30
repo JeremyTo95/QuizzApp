@@ -6,6 +6,7 @@ import * as DataConstants  from '../../data/constants';
 
 /**
  * Question Model
+ * @constructor
  */
 export default class QuestionModel {
 	@observable question    = undefined;
@@ -19,7 +20,8 @@ export default class QuestionModel {
 
 	/**
 	 * Shuffle the array
-	 * @param {Array to shuffle} array 
+	 * @function
+	 * @param { array } array - Array to shuffle 
 	 */
 	shuffleArray(array) {
 		let curId = array.length;
@@ -36,10 +38,11 @@ export default class QuestionModel {
 
 	/**
 	 * HTTP request on the API to get the new question
-	 * @param {Category name for http request on api} cat 
-	 * @param {Level id for http request on api } level 
-	 * @param {Number of answer whish} answers 
-	 * @param {Boolean variable to set or not anecdote } anec 
+	 * @function
+	 * @param { string  } cat     - Category name for http request on api 
+	 * @param { string  } level   - Level id for http request on api  
+	 * @param { Integer } answers - Number of answer whish 
+	 * @param { Boolean } anec    - Boolean variable to set or not anecdote 
 	 */
 	async setQuestion(cat, level, answers = 4, anec = 1) {
 		var response     = await apiManager.GetQuery(cat, level, answers, anec);
@@ -63,7 +66,8 @@ export default class QuestionModel {
 
 	/**
 	 * Get the question from id
-	 * @param {id of the question} id 
+	 * @function
+	 * @param { Integer } id - id of the question 
 	 */
 	async getQuestionById(id) {
 		var response = await sqlManager.ExecuteQuery("SELECT * FROM " + TableNames.QUESTIONS + " WHERE id = " + id, []);
@@ -73,8 +77,9 @@ export default class QuestionModel {
 
 	/**
 	 * Convert the label into name from the table name specified
-	 * @param {table name where we want to get the name} tableName 
-	 * @param {Label of the data which we want the name} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to get the name 
+	 * @param { string } label     - Label of the data which we want the name
 	 */
 	async convertLabelToName(tableName, label) {
 		var nameCat = await sqlManager.convertLabelToName(tableName, label);
@@ -83,8 +88,9 @@ export default class QuestionModel {
 	
 	/**
 	 * Convert the label into id from the table name specified
-	 * @param {table name where we want to get the name} tableName 
-	 * @param {identifier of the data which we want the id} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to get the name 
+	 * @param { string } label     - Identifier of the data which we want the id 
 	 */
 	async convertLabelToId(tableName, label) {
 		var idLevel = await sqlManager.convertLabelToId(tableName, label);
@@ -93,6 +99,7 @@ export default class QuestionModel {
 
 	/**
 	 * Return the question
+	 * @function
 	 */
 	getQuestion() {
 		return this.question;
@@ -100,6 +107,7 @@ export default class QuestionModel {
 	
 	/**
 	 * Return the answer
+	 * @function
 	 */
 	getAnswer() {
 		return this.answer;
@@ -107,6 +115,7 @@ export default class QuestionModel {
 
 	/**
 	 * Return the index of the answer from the list of answer
+	 * @function
 	 */
 	getAnswerIndex() {
 		for (let i = 0; i < this.answers.length; i++) 
@@ -118,6 +127,7 @@ export default class QuestionModel {
 
 	/**
 	 * Return the list of answers
+	 * @function
 	 */
 	getAnswers() {
 		return this.answers;
@@ -125,6 +135,7 @@ export default class QuestionModel {
 
 	/**
 	 * Return the score
+	 * @function
 	 */
 	getScore() {
 		return this.score;
@@ -132,7 +143,8 @@ export default class QuestionModel {
 
 	/**
 	 * Set the score with the new score value in parameter
-	 * @param {New score value} newScore 
+	 * @function
+	 * @param { Integer } newScore - New score value 
 	 */
 	setScore(newScore) {
 		this.score = newScore;
@@ -140,6 +152,7 @@ export default class QuestionModel {
 
 	/**
 	 * Increase the score
+	 * @function
 	 */
 	increaseScore() {
 		var score = this.score;
@@ -148,6 +161,7 @@ export default class QuestionModel {
 
 	/**
 	 * Return the anecdote
+	 * @function
 	 */
 	getAnecdote() {
 		return this.anecdote;

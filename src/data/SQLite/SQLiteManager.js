@@ -3,6 +3,7 @@ import SQLite from 'react-native-sqlite-storage';
 
 /**
  * SQL Manager : Manage the local data
+ * @constructor
  */
 export default class SQLiteManager extends React.Component {
 	constructor() {
@@ -13,8 +14,9 @@ export default class SQLiteManager extends React.Component {
 	/**
 	 * Execute query like 
 	 * "ExecuteQuery(INSERT INTO Levels(label, name) VALUES (?, ?), ['LabelValue', 'NameValue'])"
-	 * @param {SQL query} sql 
-	 * @param {Parameters} params 
+	 * @function
+	 * @param { string } sql    - SQL query 
+	 * @param { array  } params - Parameters 
 	 */
 	ExecuteQuery = (sql, params = []) => new Promise((resolve, reject) => {
 		db.transaction((trans) => {
@@ -29,7 +31,8 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Select data from table
-	 * @param {Table name where we want to select data} tableName 
+	 * @function
+	 * @param { string } tableName - Table name where we want to select data 
 	 */
 	async selectTable(tableName) {
 		let select = await this.ExecuteQuery("SELECT * FROM " + tableName + " ORDER BY id DESC",  []);
@@ -39,8 +42,9 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Convert the label into name
-	 * @param {Table name where we want to search the id} tableName 
-	 * @param {Label which is gonna send back the name} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to search the id 
+	 * @param { string } label     - Label which is gonna send back the name 
 	 */
 	async convertLabelToName(tableName, label) {
 		let nameSQL = await this.ExecuteQuery("SELECT name FROM " + tableName + " WHERE label = '" + label + "'", []);
@@ -51,8 +55,9 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Convert the label into id
-	 * @param {Table name where we want to search the id} tableName 
-	 * @param {Label which is gonna send back the id} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to search the id 
+	 * @param { string } label     - Label which is gonna send back the id 
 	 */
 	async convertLabelToId(tableName, label) {
 		let idSQL = await this.ExecuteQuery("SELECT id FROM " + tableName + " WHERE label = '" + label + "'", []);
@@ -63,8 +68,9 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Convert the id into label
-	 * @param {Table name where we want to search the label} tableName 
-	 * @param {Id which is gonnad send back the label} id 
+	 * @function
+	 * @param { string } tableName - Table name where we want to search the label
+	 * @param { Integer} id        - Id which is gonnad send back the label 
 	 */
 	async convertIdToLabel(tableName, id) {
 		let labelSQL = await this.ExecuteQuery("SELECT label FROM " + tableName + " WHERE id = " + id, []);
@@ -75,7 +81,8 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Shuffle the array
-	 * @param {Array to shuffle} array 
+	 * @function
+	 * @param { Array } array - Array to shuffle 
 	 */
 	shuffleArray(array) {
 		let curId = array.length;
@@ -92,6 +99,7 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Delete the questions in database
+	 * @function
 	 */
 	async deleteQuestionsHistory() {
 		await this.ExecuteQuery("DELETE FROM QUESTIONS", []);
@@ -99,7 +107,8 @@ export default class SQLiteManager extends React.Component {
 
 	/**
 	 * Insert question in database from string response
-	 * @param { Donnée réponse de la requête en format String } dataStr 
+	 * @function
+	 * @param { string } dataStr - Answer data in string format 
 	 */
 	async insertQuestion(dataStr) {
 		var cat      = undefined;	// initialisation of the category variable

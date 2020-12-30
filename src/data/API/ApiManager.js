@@ -3,6 +3,7 @@ import * as ApiOptions from './ApiOptions';
 
 /**
  * API Manager : Get data from API
+ * @constructor
  */
 export default class ApiManager extends React.Component {
 	constructor() {
@@ -12,10 +13,11 @@ export default class ApiManager extends React.Component {
 
 	/**
 	 * HTTP request on the API
-	 * @param { Category to search } cat 
-	 * @param { Level to search } diff 
-	 * @param { Number of answer desired } nbAnswers 
-	 * @param { Boolean value to define the anecdote } anec 
+	 * @function
+	 * @param { string  } cat       - Category to search 
+	 * @param { string  } diff      - Level to search 
+	 * @param { Integer } nbAnswers - Number of answer desired 
+	 * @param { Boolean } anec      - Boolean value to define the anecdote 
 	 */
 	ExecuteQuery = (cat, diff, nbAnswers = 4, anec = 1) => new Promise((resolve, reject) => {
 		const url = ApiOptions.API_URL + ApiOptions.API_KEY_1 + ApiOptions.API_SET_CATEGORY + cat + ApiOptions.API_SET_DIFFICULTY + diff + ApiOptions.API_SET_NB_CHOICE_OPTIONS + nbAnswers + ApiOptions.API_IS_ANECDOTE + anec;
@@ -29,10 +31,11 @@ export default class ApiManager extends React.Component {
 
 	/**
 	 * Get Query on the API
-	 * @param { Category to search } cat 
-	 * @param { Level to search } diff 
-	 * @param { Number of answer desired } nbAnswers 
-	 * @param { Boolean value to define the anecdote } anec 
+	 * @function
+	 * @param { string  } cat       - Category to search 
+	 * @param { string  } diff      - Level to search 
+	 * @param { Integer } nbAnswers - Number of answer desired 
+	 * @param { Boolean } anec       - Boolean value to define the anecdote 
 	 */
 	async GetQuery(cat, diff, nbAnswers = 4, anec = 1) {
 		var data = await this.ExecuteQuery(cat, diff, nbAnswers, anec);

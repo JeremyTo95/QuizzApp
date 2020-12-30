@@ -10,6 +10,7 @@ const HomeStack = createStackNavigator();
 
 /**
  * Home routes : define all home routes 
+ * @constructor
  */
 const HomeRoutes = () => {
 	return (<HomeStack.Navigator>

@@ -5,7 +5,8 @@ import styles         from './styles';
 
 /**
  * Title
- * { Text to show } title
+ * @constructor
+ * @param { string } title - Text to show
  */
 export default class Title extends React.Component {
 	render() {

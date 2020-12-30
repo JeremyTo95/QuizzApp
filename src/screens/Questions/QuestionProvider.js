@@ -6,6 +6,7 @@ import RootStore          from '../../models/RootStore';
 
 /**
  * Question provider
+ * @constructor
  */
 @inject(RootStore.type.QUESTION_MODEL)
 export default class QuestionProvider extends React.Component {

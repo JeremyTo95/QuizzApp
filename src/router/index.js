@@ -7,6 +7,7 @@ const RootStack = createStackNavigator();
 
 /**
  * Router : route engine 
+ * @constructor
  */
 const Router = () => {
 	return (<RootStack.Navigator>

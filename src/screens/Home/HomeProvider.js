@@ -6,6 +6,7 @@ import RootStore from '../../models/RootStore';
 
 /**
  * Home provider
+ * @constructor
  */
 @inject(RootStore.type.HOME_MODEL)
 class HomeProvider extends React.Component {

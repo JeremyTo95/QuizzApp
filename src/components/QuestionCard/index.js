@@ -7,7 +7,8 @@ import * as Colors                           from '../../assets/Colors';
 
 /**
  * Question representation in card format
- * { question to show } question
+ * @constructor
+ * @param { JSON Object } question - Question to show
  */
 export default class QuestionCard extends React.Component {
 	constructor(props) {

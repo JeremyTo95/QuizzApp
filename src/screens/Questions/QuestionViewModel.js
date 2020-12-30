@@ -1,5 +1,7 @@
 /**
  * Question View Model
+ * @constructor
+ * @param { QuestionModel } questionStore - Question Model
  */
 export default class QuestionViewModel {
 	constructor(questionStore) {
@@ -8,10 +10,11 @@ export default class QuestionViewModel {
 
 	/**
 	 * Set the question request
-	 * @param {Category desired} cat 
-	 * @param {Level desired} level 
-	 * @param {Number of answers desired} answers 
-	 * @param {Boolean value to define the anecdote} anec 
+	 * @function
+	 * @param { string } cat - Category desired 
+	 * @param { string } level - Level desired 
+	 * @param { Integer } answers - Number of answers desired 
+	 * @param { Boolean } anec - Boolean value to define the anecdote 
 	 */
 	async setQuestion(cat, level, answers = 4, anec = 1) {
 		await this.store.setQuestion(cat, level, answers, anec);
@@ -19,8 +22,9 @@ export default class QuestionViewModel {
 
 	/**
 	 * Convert the label into name from the table name specified
-	 * @param {table name where we want to get the name} tableName 
-	 * @param {Mabel of the data which we want the name} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to get the name 
+	 * @param { string } label - Label of the data which we want the name 
 	 */
 	async convertLabelToName(tableName, label) {
 		var res = await this.store.convertLabelToName(tableName, label);
@@ -29,8 +33,9 @@ export default class QuestionViewModel {
 	
 	/**
 	 * Convert the label into name from the table name specified
-	 * @param {table name where we want to get the name} tableName 
-	 * @param {Mabel of the data which we want the id} label 
+	 * @function
+	 * @param { string } tableName - Table name where we want to get the name 
+	 * @param { string } label - Label of the data which we want the id 
 	 */
 	async convertLabelToId(tableName, label) {
 		var res = await this.store.convertLabelToId(tableName, label);
@@ -39,6 +44,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get question
+	 * @function
 	 */
 	getQuestion() {
 		return this.store.getQuestion();
@@ -46,6 +52,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get answer
+	 * @function
 	 */
 	getAnswer() {
 		return this.store.getAnswer();
@@ -53,6 +60,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get answer index
+	 * @function
 	 */
 	getAnswerIndex() {
 		return this.store.getAnswerIndex();
@@ -60,6 +68,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get answers
+	 * @function
 	 */
 	getAnswers() {
 		return this.store.getAnswers();
@@ -67,6 +76,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get score
+	 * @function
 	 */
 	getScore() {
 		return this.store.getScore();
@@ -74,7 +84,8 @@ export default class QuestionViewModel {
 
 	/**
 	 * Set the score with the new value
-	 * @param {new score} newScore 
+	 * @function
+	 * @param { Integer } newScore - new score 
 	 */
 	setScore(newScore) {
 		this.setScore(newScore);
@@ -82,6 +93,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Increase score
+	 * @function
 	 */
 	increaseScore() {
 		this.store.increaseScore();
@@ -89,6 +101,7 @@ export default class QuestionViewModel {
 
 	/**
 	 * Get the anecdote
+	 * @function
 	 */
 	getAnecdote() {
 		return this.store.getAnecdote();

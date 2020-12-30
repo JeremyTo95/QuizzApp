@@ -3,6 +3,7 @@ import QuestionModel from './domain/QuestionModel';
 
 /**
  * Root Store
+ * @constructor
  */
 class RootStore {
 	/**
