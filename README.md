@@ -3,11 +3,11 @@
 ## Description rapide du projet
 Projet d'application mobile de 4e année à l'ESIEA avec une architecture MVVM.
 
-J'ai développé un quizz avec plusieurs thèmes et niveau diponible.
-L'application repose sur une API fourni par <a href="https://openquizzdb.org/" >Open Quizz DB</a>.
+J'ai développé un quizz avec plusieurs thèmes et niveaux disponibles.
+L'application repose sur une API fourni par <a href="https://openquizzdb.org/" >Open Quizz DB</a> et a été développé avec React Native.
 
 ## Consignes :
-- Language utilisé : Kotlin / Swift
+- Langage utilisé : Kotlin / Swift (ou autres langages présents dans le monde profesionnel)
 - Architecture MVVM
 - Clean architecture
 - Utilisation d'une réelle base de données
@@ -16,41 +16,56 @@ L'application repose sur une API fourni par <a href="https://openquizzdb.org/" >
 - Design
 
 ## Caractéristique du projet :
-- Language utilisé : JavaScript 
+- Langage utilisé : JavaScript 
 - Framework utilisé : React Native
 - Architecture MVVM 
+	- Model
+	- ModelView
+	- View
+	- Controller View
+	- Provider
 - Clean architecture
-- Utilisation d'une base de données
+- Utilisation d'une base de données SQLite
+	- Ajout de données
+	- Suppression de données
 - Utilisation d'une API REST
-- Affichage d'une liste
+	- Requête HTTP : GET
+- Affichage et gestion d'une liste :
+	- Historique des questions
+	- Possibilité d'ajouter des éléments (automatique)
+	- Possibilité de supprimer tous les éléments (appui long sur le bouton Actualiser)
 - Design :
 	- Utilisation de components
 	- Couleurs centrées dans un fichier unique
 	- Intégration d'une police externe (Montserrat)
-	- Intégration d'icone depuis Ionicons
+	- Intégration d'icône depuis Ionicons
 	- Intégration d'un logo
 - Les plus :
+	- GitFlow : 
+		- branch main pour les versions finales
+		- branch dev pour la version de développement
+		- branch \<FunctionalityName> pour le développement de la fonctionnalité  
 	- Mise en place de menu dropdown
 	- Gestion des états de l'application :
-		- Permet de gérer en direct les éléments graphique de l'application (style et components par exemple)
-	- Intégration d'une sécurité pour la gestion du temps des requêtes API (1 minute minimum entre chaque requêtes)
-	- Intégration d'un partage des questions enregistrées (Pas présent dans la démo final mais bien présent et fonctionnel dans le code)
+		- Permet de gérer en direct les éléments graphiques de l'application (ex : styles et components)
+	- Intégration d'une sécurité pour la gestion du temps des requêtes API (1 minute minimum entre chaque requête)
+	- Intégration d'un partage des questions enregistrées
 
 ## Outils techniques utilisés
 #### React Native: Framework de développement mobile iOS et Android. 
 ##### Explication : 
-React native est l'un des framework les plus utilisés et utilise du JavaScript comme code source. Le code JS est ensuite converti en code natif sur la plateforme iOS et Android.
+React native est l'un des frameworks les plus utilisés aujourd'hui et utilise du JavaScript comme code source. Le code JS est ensuite converti en code natif sur la plateforme iOS ou Android. Certaines fonctionnalités ont besoins de configuration spécifique pour la plateforme.
 
 ##### Remarque :
-Dans mon cas, le développement est plus orienté Android. Des fonctionnalités sur iOS n'ont pas pu être configuré. 
+Dans mon cas, le développement est orienté Android. Des fonctionnalités sur iOS n'ont pas pu être configuré car je ne suis pas sur macOS. 
 
 ##### Librairies principales utilisées :
 - <b>mobx :</b> Utilisé pour la structure MVVM
 - <b>react-navigation :</b> Utilisé pour la navigation entre les vues de l'application
 - <b>react-native-sqlite-storage :</b> Utilisé pour le stockage des données dans l'application
-- <b>react-native-vector-icons :</b> Utilisé pour les icones Ionicons 
+- <b>react-native-vector-icons :</b> Utilisé pour les icônes Ionicons 
 
-#### DB Browser for SQLite: Création et insertion des données de base dans l'application
+#### DB Browser for SQLite: Création et insertion des données initiales dans l'application
 ##### Explication
 Pour l'initialisation de la base de données, il est plus de simple de créer sa structure et ses données initiales hors de l'application. 
 Ensuite, la bdd est intégré dans le répertoire : <b>./android/app/src/main/assets/mydb.db</b>
@@ -188,10 +203,14 @@ Elle a ensuite été ajouter dans le répertoire ./android/app/src/main/res/
 
 ### 7. Rendu Final
 Voici le rendu final (après un montage vidéo pour gagner du temps et éviter la minute d'attente entre chaque question)
-<p align="center"><img src="./ReadMeAssets/final.gif" width="50%" /> </p>
+<p align="center"><img src="./ReadMeAssets/final.gif" width="25%" /> </p>
 
 
 ## Tester le projet
-Pour tester ce projet, il faut installer react native sur son ordinateur.
-Voici un tutoriel pour le faire :
-<a href="https://reactnativecode.com/installing-react-native-windows-tutorial/#:~:text=%20Installing%20React%20Native%20on%20Windows%20Tutorial%20,%3A%20Download%20and%20install%20JDK%20from...%20More%20">Installing React Native on Windows</a>
+
+##### 1. Installation de react-native
+##### 2. Clone du projet avec git clone
+##### 3. cd ./QuizzApp
+##### 4. npm install
+##### 5. react-native link
+##### 6. react-native run-android

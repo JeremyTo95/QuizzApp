@@ -10,6 +10,7 @@ MERGED from [:react-native-reanimated] C:\Users\jerem\React_Native\QuizzApp\node
 MERGED from [:react-native-safe-area-context] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-screens] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-screens\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-sqlite-storage] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-vector-icons] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.63.4] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\cf97fcfc78ed61ec3a6c5de294b8eee2\jetified-react-native-0.63.4\AndroidManifest.xml:2:1-13:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\37b6f551bc5ae153b0b627de8f563815\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [org.webkit:android-jsc:r245459] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\6dd6245206e34676e1ee3aa6ee0f68c9\android-jsc-r245459\AndroidManifest.xml:2:1-11:12
@@ -138,6 +139,8 @@ MERGED from [:react-native-screens] C:\Users\jerem\React_Native\QuizzApp\node_mo
 MERGED from [:react-native-screens] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-screens\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-sqlite-storage] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-sqlite-storage] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] C:\Users\jerem\React_Native\QuizzApp\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.63.4] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\cf97fcfc78ed61ec3a6c5de294b8eee2\jetified-react-native-0.63.4\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.63.4] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\cf97fcfc78ed61ec3a6c5de294b8eee2\jetified-react-native-0.63.4\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\jerem\.gradle\caches\transforms-2\files-2.1\37b6f551bc5ae153b0b627de8f563815\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/QuizzApp.iml" filepath="$PROJECT_DIR$/.idea/modules/QuizzApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1181251649/QuizzApp.@react-native-community_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1181251649/QuizzApp.@react-native-community_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/QuizzApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/QuizzApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1917383550/QuizzApp.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1917383550/QuizzApp.react-native-community_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-770792679/QuizzApp.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-770792679/QuizzApp.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2004832413/QuizzApp.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/-2004832413/QuizzApp.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1346021054/QuizzApp.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-1346021054/QuizzApp.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/874578906/QuizzApp.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/874578906/QuizzApp.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1689896728/QuizzApp.react-native-sqlite-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1689896728/QuizzApp.react-native-sqlite-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/193655645/QuizzApp.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/193655645/QuizzApp.react-native-vector-icons.iml" />
+    </modules>
+  </component>
+</project>

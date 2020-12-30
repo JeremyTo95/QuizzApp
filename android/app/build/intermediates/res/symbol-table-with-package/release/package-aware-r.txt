@@ -1816,6 +1816,7 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw app
+raw node_modules_reactnativevectoricons_glyphmaps_ionicons
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
