@@ -70,15 +70,15 @@ Dans mon cas, le développement est orienté Android. Des fonctionnalités sur i
 Pour l'initialisation de la base de données, il est plus de simple de créer sa structure et ses données initiales hors de l'application. 
 Ensuite, la bdd est intégré dans le répertoire : <b>./android/app/src/main/assets/mydb.db</b>
 
-Les données suplémentaires seront ensuite insérer dans les tables correspondantes.
+Les données suplémentaires seront ensuite insérées dans les tables correspondantes.
 
 ## Etape de développement
 ### 1. Recherche de l'API :
 L'API de Open Quizz DB se trouve <a href="https://openquizzdb.org/">ici</a>
 #### Fonctionnement :
-L'API fonctionne avec une clé d'authentification à ajouter dans l'URL avec les autres caractéristiques souhaité.
+L'API fonctionne avec une clé d'authentification à ajouter dans l'URL avec les autres caractéristiques souhaitées.
 Elle renvoie une réponse sous le format JSON.
-La liste des fonctionnalité se trouve dans sa <a href="https://www.kiwime.com/oqdb/pdf/openquizzdb_api.pdf">documentation</a>
+La liste des fonctionnalités se trouve dans sa <a href="https://www.kiwime.com/oqdb/pdf/openquizzdb_api.pdf">documentation</a>
 
 #### Particularités :
 - Limité à 1 requête toute les minutes
@@ -91,9 +91,9 @@ C'est l'une des seules librairies disponnible qui nous permet d'avoir accès à 
 Voici les étapes d'implémentation de la base de données : 
 1. Création des tables de la base de données sur DB Browser for SQLite.
 2. Insertion des données de base de l'application : 
-- Les categories
+- Les catégories
 - Les niveaux
-3. Exportation de la base de donnée dans le répertoire assets de android : ./android/app/src/main/assets/mydb.db
+3. Exportation de la base de données dans le répertoire assets de android : ./android/app/src/main/assets/mydb.db
 4. Implémentation de la base de données dans le code source Javascript dans le fichier App.js
 5. Création de la librairie SQLManager pour faire des requêtes sur la base de données.
 
@@ -106,7 +106,7 @@ Elle permet de faire des requêtes sur l'API en fonction de la catégorie et du 
 Pour le développement MVVM sur react native, nous devons mettre en place 5 composantes : 
 	1. La View qui contient les éléments graphiques
 	2. Le Controller de la vue qui gère la logique et les interractions avec la vue
-	3. Le ViewModel qui fait l'interface entre le Model et le controller.
+	3. Le ViewModel qui fait l'interface entre le Model et le Controller.
 	4. Le Model qui contient les données de la vue.
 	5. Le Provider qui relie tous le Model, le ViewModel et le Controller.
 
@@ -171,17 +171,17 @@ Pour le développement MVVM sur react native, nous devons mettre en place 5 comp
 
 ```
 
-Le démarche à suivre pour la structure MVVM a été donnée par un tutoriel de <a href="https://medium.cobeisfresh.com/level-up-your-react-architecture-with-mvvm-a471979e3f21">Medium</a>
+La démarche à suivre pour la structure MVVM a été donné par un tutoriel de <a href="https://medium.cobeisfresh.com/level-up-your-react-architecture-with-mvvm-a471979e3f21">Medium</a>
 
 ### 5. Création et intégration des components
-Pour faciliter la création graphique, j'ai créé un dossier components qui contient tous les éléments graphiques customisés qui sont utiliser dans plusieurs fichiers du projet.
+Pour faciliter la création graphique, j'ai créé un dossier components qui contient tous les éléments graphiques customisés qui sont utilisés dans plusieurs fichiers du projet.
 
 Nous pouvons lister les 4 components et donner leurs caractéristiques rapides : 
 1. Button
 <p align="center"><img src="./ReadMeAssets/raisedbtn.jpg" width="50%" /></p>
 <p align="center"><img src="./ReadMeAssets/flatbtn.jpg" width="50%" /></p>
 <p align="center"><img src="./ReadMeAssets/ButtonExample.jpg" width="50%" /></p>
-Le component Button prend en paramètre le texte souhaité, la fonction à executer en cas d'appui et permet de déterminer le style du bouton en fonction de la variable isRaised
+Le component Button prend en paramètre le texte souhaité, la fonction à executer en cas d'appui et permet de déterminer le style du bouton en fonction de la variable isRaised.
 
 2. QuestionCard
 <p align="center"><img src="./ReadMeAssets/questionCard.jpg" width="50%" /></p>
@@ -198,8 +198,8 @@ Component simple qui affiche un sous titre avec le style propre au sous titre
 ### 6. Mise en place des quelques éléments graphiques
 Dans cette application, les icones affichées viennent de la librairie Ionicons.
 
-L'icone de l'application a été générer à partir de <a href="http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=image&foreground.space.trim=1&foreground.space.pad=0.25&foreColor=rgba(96%2C%20125%2C%20139%2C%200)&backColor=rgb(255%2C%20255%2C%20255)&crop=0&backgroundShape=square&effects=none&name=ic_launcher">AndroidAssetStudio</a>.
-Elle a ensuite été ajouter dans le répertoire ./android/app/src/main/res/
+L'icone de l'application a été généré à partir de <a href="http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=image&foreground.space.trim=1&foreground.space.pad=0.25&foreColor=rgba(96%2C%20125%2C%20139%2C%200)&backColor=rgb(255%2C%20255%2C%20255)&crop=0&backgroundShape=square&effects=none&name=ic_launcher">AndroidAssetStudio</a>.
+Elle a ensuite été ajouté dans le répertoire ./android/app/src/main/res/
 
 ### 7. Rendu Final
 Voici le rendu final (après un montage vidéo pour gagner du temps et éviter la minute d'attente entre chaque question)
