@@ -1,7 +1,9 @@
-import React          from 'react';
-import { View, Text } from 'react-native';
+import      React                            from 'react';
+import      { View, Text, TouchableOpacity } from 'react-native';
+import      Ionicons                         from 'react-native-vector-icons/Ionicons'
 
-import styles         from './styles';
+import      styles                           from './styles';
+import * as Colors                           from '../../assets/Colors';
 
 /**
  * Question representation in card format
@@ -13,12 +15,15 @@ export default class QuestionCard extends React.Component {
 	}
 
 	render() {
-		const { question } = this.props;
+		const { question, share } = this.props;
 		var   answersJSON  = JSON.parse(question['answers']);
 		return (
 			<View style={ styles.container }>
-				<View style={ styles.subcontainer }>
+				<View style={ styles.header_container }>
 					<Text style={ styles.title }>{ question['category'] + " : " + question['level'] }</Text>
+					<TouchableOpacity onPress={ () => share(question) } style={ styles.share_btn } >
+						<Ionicons name="share-social-outline" size={ 25 } color={ Colors.TEXT_COLOR } />
+					</TouchableOpacity>
 				</View>
 				<View style={ styles.subcontainer }>
 					<Text style={ styles.subtitle }>La question</Text>

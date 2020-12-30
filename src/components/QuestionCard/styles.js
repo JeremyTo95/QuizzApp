@@ -12,6 +12,16 @@ const styles = new StyleSheet.create({
 		marginVertical: 20.0,
 		marginHorizontal: 10.0
 	},
+	header_container: {
+		display: 'flex',
+		flexDirection: 'row',
+		marginVertical: 5.0,
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	share_btn: {
+		padding: 10.0
+	},
 	subcontainer: {
 		display: 'flex',
 		flexDirection: 'column',

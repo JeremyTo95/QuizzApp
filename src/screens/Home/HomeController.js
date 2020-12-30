@@ -2,7 +2,7 @@ import React              from 'react';
 import HomeView           from './HomeView';
 
 import { MenuItem }       from 'react-native-material-menu';
-import { Alert }          from 'react-native';
+import { Alert, Share }   from 'react-native';
 import QuestionCard       from '../../components/QuestionCard';
 
 import * as screen_labels from '../constants'
@@ -145,6 +145,29 @@ export default class HomeController extends React.Component {
 	}
 
 	/**
+	 * Share question
+	 * @param {Question to share} question 
+	 */
+	async shareQuestion(question) {
+		console.log(question);
+		var answers = JSON.parse(question['answers']);
+		var shareContent = '';
+		shareContent += 'Devinette : \n' + question['label'] + '\n\n';
+		shareContent += 'Propositions :\n - ' + answers[0] + '\n - ' + answers[1] + '\n - ' + answers[2] + '\n - ' + answers[3] + '\n\n\n';
+		shareContent += 'Réponse : \n' + question['answer'] + '\n\n';
+		shareContent += 'Anecdote : \n' + question['anecdote'];
+		console.log(shareContent);
+		try {
+			const result = await Share.share({
+				message: shareContent
+			});
+			console.log(result);
+		} catch (error) {
+			alert(error.message);
+		}
+	}
+
+	/**
 	 * Build question history
 	 */
 	buildQuestionsHistory = () => {
@@ -158,6 +181,7 @@ export default class HomeController extends React.Component {
 							<QuestionCard 
 								key={ item['id'] } 
 								question={ item } 
+								share={ this.shareQuestion }
 							/>
 						);
 					}
@@ -206,7 +230,7 @@ export default class HomeController extends React.Component {
 		return (
 			Alert.alert(
 				"Attention : Demande de suppression des données",
-				"Vous avez appuyer longtemps sur le bouton actualiser. Cela à pour effet la demande de suppression des données",
+				"Vous avez appuyer longtemps sur le bouton actualiser. Cela a pour effet la demande de suppression des données",
 				[
 					{
 						text: "Annuler",   onPress: () => console.log("Annuler")
