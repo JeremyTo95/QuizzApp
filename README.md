@@ -214,3 +214,8 @@ Voici le rendu final (après un montage vidéo pour gagner du temps et éviter l
 ##### 4. npm install
 ##### 5. react-native link
 ##### 6. react-native run-android
+##### Autre : S'il y a un problème avec le build de l'application, il faut faire
+	$ cd android/
+	$ ./gradlew clean
+	$ cd ../
+	$ react-native run-android
